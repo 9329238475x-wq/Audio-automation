@@ -1,0 +1,24 @@
+{
+  "produced_stories": [
+    {
+      "story_id": "test_akhiri_khat_demo",
+      "title": "आख़िरी ख़त और वो बारिश की रात",
+      "file_name": "ai_summary_test_2min",
+      "word_count": 500,
+      "approx_hours": 0.05,
+      "produced_date": "2026-10-05T18:00:00Z",
+      "youtube_id": "f1YoQ-3f4WI",
+      "youtube_url": "https://youtu.be/f1YoQ-3f4WI",
+      "status": "completed"
+    }
+  ],
+  "current_in_progress": {
+    "story_id": "2_nirmala_part1_34k_words_hindi_4hours",
+    "title": "मुंशी प्रेमचंद - निर्मला (भाग १)",
+    "file_name": "2_Nirmala_Part1_34k_Words_Hindi_4Hours.txt",
+    "word_count": 34113,
+    "approx_hours": 4.0,
+    "started_at": "2026-10-05T19:24:33.257782Z"
+  },
+  "last_updated": "2026-10-05T19:24:33.257782Z"
+}

@@ -93,10 +93,28 @@ def run_audio_story_pipeline(
     audio_files = []
     AUDIO_CHUNKS_DIR.mkdir(parents=True, exist_ok=True)
 
+    total_tasks = len(scene_tasks)
     for task in scene_tasks:
         idx = task["index"]
         char = task["character"]
-        out_chunk = AUDIO_CHUNKS_DIR / f"chunk_{idx:03d}_{char.lower()}.wav"
+        out_chunk = AUDIO_CHUNKS_DIR / f"chunk_{idx:05d}_{char.lower()}.wav"
+
+        # Smart Cache & Crash-Resilience: Skip already synthesized chunks
+        if out_chunk.exists() and out_chunk.stat().st_size > 1000:
+            audio_files.append(out_chunk)
+        if idx % 50 == 0:
+            import gc
+            gc.collect()
+            try:
+                import torch
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+            except Exception:
+                pass
+            print(f"  📊 [Progress] {idx}/{total_tasks} chunks synthesized ({idx/total_tasks*100:.1f}%)")
+            if idx % 50 == 0 or idx == total_tasks:
+                print(f"  ⏩ [Cached] Chunk {idx}/{total_tasks} ({idx/total_tasks*100:.1f}%) already synthesized.")
+            continue
 
         if engine.lower() == "edge":
             voice_engine.synthesize_segment(

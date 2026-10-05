@@ -1,4 +1,7 @@
-﻿# -*- coding: utf-8 -*-
+import sys
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+# -*- coding: utf-8 -*-
 """
 Intelligent Hindi Dialogue Parser and Drama Director
 1. Strips all blog headings, SEO garbage, and comment boilerplate.

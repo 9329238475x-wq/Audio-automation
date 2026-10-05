@@ -1,15 +1,11 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
-Auto Drama Hunter: Automated 30k-40k Words High-Stakes Drama Finder
+Auto Drama Hunter: Automated 30k-40k Words High-Stakes Drama Finder and Autopilot Rotation Engine
 Strictly hunts DRAMAS:
-- Romance, Betrayal, Revenge, Heartbreak, Arranged Marriage, Mafia/CEO, Family Twists
-- Minimum word filter: Strictly 30,000 to 45,000 words (3 to 4 hours of audio)
-- Rejects all tiny blogs, short stories, and non-dramas
-Supports 4 Hunting Modes:
-1. Local Mega Dramas (Premchand Nirmala, Gaban, Devdas - 30k to 38k words)
-2. Live Pratilipi / Wattpad Multi-Episode Crawler (20 to 30 chapters auto-stitched)
-3. Gemini AI 10-Chapter Mega Drama Generator (35k words custom story on any prompt)
-4. Public Domain Classic Drama Archive Downloader
+- Romance, Betrayal, Revenge, Heartbreak, Arranged Marriage, Family Tragedy and Social Drama
+- Minimum word filter: Strictly 25,000 to 45,000 words (3 to 5 hours of continuous audio)
+- Zero AI hallucinations / Zero 2-minute summaries: Uses real, authentic full-length Hindi literature and serialized web novels.
+- Persistent tracking: config/produced_stories.json ensures stories are NEVER repeated on autopilot!
 """
 
 import os
@@ -17,170 +13,253 @@ import re
 import sys
 import json
 import time
+import datetime
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 import requests
 from dotenv import load_dotenv
 
 # Force UTF-8 on Windows
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
-INPUT_STORIES_DIR = Path(__file__).resolve().parent.parent / "input_stories"
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+INPUT_STORIES_DIR = ROOT_DIR / 'input_stories'
 INPUT_STORIES_DIR.mkdir(parents=True, exist_ok=True)
+CONFIG_DIR = ROOT_DIR / 'config'
+CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+SCRIPTS_DIR = ROOT_DIR / 'output' / 'scripts'
+SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
+PRODUCED_DB_PATH = CONFIG_DIR / 'produced_stories.json'
 
-DRAMA_KEYWORDS = [
-    "love story", "sad story", "drama", "romance", "धोखा", "इंतकाम", "दर्द",
-    "कयामत", "शादी", "अरेंज मैरिज", "माफिया", "सीईओ", "जुदाई", "आँसू", "बदला"
+PREFERRED_LOCAL_ORDER = [
+    ('2_Nirmala_Part1_34k_Words_Hindi_4Hours.txt', 'मुंशी प्रेमचंद - निर्मला (भाग १)', 'मुंशी प्रेमचंद की कालजयी दास्तान: निर्मला और तोताराम का अनमेल विवाह | 4 Hours Full Mega Novel | Garib YT'),
+    ('3_Nirmala_Part2_34k_Words_Hindi_4Hours.txt', 'मुंशी प्रेमचंद - निर्मला (भाग २ - अंतिम भाग)', 'निर्मला का दर्दनाक अंत और पश्चाताप की अग्नि | 4 Hours Climax Mega Novel | Garib YT'),
+    ('5_Gaban_Part1_38k_Words_Hindi_4Hours.txt', 'मुंशी प्रेमचंद - ग़बन (भाग १)', 'मुंशी प्रेमचंद का शाहकार उपन्यास: ग़बन - रमानाथ और जालपा की कहानी | 4.5 Hours Full Mega Novel | Garib YT'),
+    ('6_Gaban_Part2_38k_Words_Hindi_4Hours.txt', 'मुंशी प्रेमचंद - ग़बन (भाग २)', 'ग़बन - कर्ज़, लालच और जालपा के कंगन का सच | 4.5 Hours Mega Novel | Garib YT'),
+    ('7_Gaban_Part3_38k_Words_Hindi_4Hours.txt', 'मुंशी प्रेमचंद - ग़बन (भाग ३ - महा-क्लाइमैक्स)', 'ग़बन - रमानाथ की फ़रारी और जालपा का प्रायश्चित | 4.5 Hours Climax Novel | Garib YT'),
+    ('1_Nirmala_Complete_Novel_68k_Hindi.txt', 'मुंशी प्रेमचंद - निर्मला (संपूर्ण उपन्यास)', 'निर्मला - संपूर्ण उपन्यास एक ही वीडियो में | 8 Hours Complete Hindi Audio Book | Garib YT')
 ]
 
 class AutoDramaHunter:
-    def __init__(self, min_words: int = 30000, max_words: int = 45000):
+    def __init__(self, min_words: int = 25000, max_words: int = 50000):
         self.min_words = min_words
         self.max_words = max_words
-        load_dotenv(Path(__file__).resolve().parent.parent / ".env")
-        self.gemini_key = os.environ.get("GEMINI_API_KEY", "")
+        load_dotenv(ROOT_DIR / '.env')
+        self.gemini_key = os.environ.get('GEMINI_API_KEY', '')
+
+    def _load_produced_db(self) -> Dict[str, Any]:
+        if not PRODUCED_DB_PATH.exists():
+            default_db = {
+                'produced_stories': [],
+                'current_in_progress': None,
+                'last_updated': datetime.datetime.utcnow().isoformat() + 'Z'
+            }
+            PRODUCED_DB_PATH.write_text(json.dumps(default_db, indent=2, ensure_ascii=False), encoding='utf-8')
+            return default_db
+        try:
+            return json.loads(PRODUCED_DB_PATH.read_text(encoding='utf-8'))
+        except Exception:
+            return {'produced_stories': [], 'current_in_progress': None}
+
+    def _save_produced_db(self, db: Dict[str, Any]):
+        db['last_updated'] = datetime.datetime.utcnow().isoformat() + 'Z'
+        PRODUCED_DB_PATH.write_text(json.dumps(db, indent=2, ensure_ascii=False), encoding='utf-8')
+
+    def is_story_produced(self, file_name: str) -> bool:
+        db = self._load_produced_db()
+        for s in db.get('produced_stories', []):
+            if s.get('file_name') == file_name and s.get('status') == 'completed':
+                return True
+        return False
 
     def hunt_local_dramas(self) -> List[Dict[str, Any]]:
-        """Scans input_stories directory for verified 30k-45k word dramas."""
+        """Scans input_stories directory for verified 25k-50k word Hindi dramas."""
         found = []
-        for f in sorted(INPUT_STORIES_DIR.glob("*.txt")):
+        for f in sorted(INPUT_STORIES_DIR.glob('*.txt')):
+            if 'english' in f.name.lower() or 'sherlock' in f.name.lower():
+                continue
             try:
-                text = f.read_text(encoding="utf-8")
+                text = f.read_text(encoding='utf-8')
                 words = len(text.split())
-                if words >= 25000: # 3+ hours
-                    # Estimate hours
+                if words >= self.min_words:
                     approx_hours = round(words / 8500, 1)
-                    title = f.stem.replace("_", " ")
+                    title = f.stem.replace('_', ' ')
                     found.append({
-                        "file": f.name,
-                        "path": str(f),
-                        "title": title,
-                        "words": words,
-                        "approx_hours": approx_hours,
-                        "source": "Local Mega Drama Archive"
+                        'file': f.name,
+                        'path': str(f),
+                        'title': title,
+                        'words': words,
+                        'approx_hours': approx_hours,
+                        'source': 'Local Mega Drama Archive'
                     })
             except Exception:
                 continue
         return found
 
-    def generate_ai_drama_novel(
-        self,
-        topic: str = "अरेंज मैरिज और कोल्ड हसबैंड की नफ़रत",
-        hero: str = "कबीर",
-        heroine: str = "आरुषि",
-        num_chapters: int = 10
-    ) -> Dict[str, Any]:
+    def get_next_autopilot_drama(self, channel_name: str = 'Garib YT') -> Dict[str, Any]:
         """
-        Generates a full 30,000 - 35,000 word high-stakes Drama novel using Gemini AI:
-        - Writes 10 intense chapters (3,000-3,500 words per chapter).
-        - Each chapter has cliffhangers, dialogue turns, emotional twists, and dramatic climaxes.
-        - Uses ~10 API calls out of 1,500 daily free limit (under 1% quota).
+        100% Autonomous Story Hunter for Set-and-Forget Autopilot:
+        1. Checks produced_stories.json database.
+        2. Picks the next unproduced 30k-40k words master novel from local archive.
+        3. If all local novels are completed, crawls web series from Pratilipi/novel archives.
+        4. Parses full text paragraph-by-paragraph with DramaScriptBuilder (0% skipped lines).
+        5. Saves script and returns complete metadata.
         """
-        print(f"\n🌟 [AutoDramaHunter] Generating 35k Words Mega Drama Novel via Gemini AI...")
-        print(f"  📖 Topic: {topic}")
-        print(f"  🎭 Hero: {hero} | Heroine: {heroine} | Target: 10 Chapters (~35,000 words)")
+        print('\n' + '=' * 76)
+        print(' 🎯 [AutoDramaHunter] SELECTING NEXT UNPRODUCED MEGA NOVEL (3-5 HOURS)')
+        print('=' * 76)
 
-        from story_engine.gemini_drama_director import GeminiDramaDirector
-        director = GeminiDramaDirector()
+        db = self._load_produced_db()
+        selected_file = None
+        selected_title = ''
+        selected_display_title = ''
 
-        chapters = []
-        story_context = f"Topic: {topic}. Hero: {hero}, Heroine: {heroine}. Genre: Emotional Pocket FM Hard Drama."
-
-        for chap in range(1, num_chapters + 1):
-            print(f"  ▶️ Generating Chapter {chap}/{num_chapters} (~3,200 words)...")
-            prompt = f"""Write Chapter {chap} of a 10-chapter serialized Hindi Romantic Drama novel.
-Story Premise: {story_context}
-Previous Chapter Context: {chapters[-1][:300] if chapters else "Story begins with a high stakes dramatic conflict and tears."}
-Requirements:
-1. Write in rich, emotional, dramatic Hindi (खड़ी बोली).
-2. Deep dialogue between {hero} and {heroine}, emotional pain, tears, sharp confrontation.
-3. Length: Minimum 3,000 words for this chapter.
-4. End with an explosive cliffhanger for Chapter {chap+1}.
-"""
-            ans = director.call_gemini_json(prompt)
-            # If JSON returned, extract texts
-            if ans and isinstance(ans, list):
-                chap_text = "\n\n".join(s.get("text", "") for s in ans if s.get("text"))
-            else:
-                # Raw text fallback
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={self.gemini_key}"
-                resp = requests.post(url, json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=45)
-                if resp.status_code == 200:
-                    chap_text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+        # 1. Check priority local queue first
+        for fname, short_title, full_display_title in PREFERRED_LOCAL_ORDER:
+            fpath = INPUT_STORIES_DIR / fname
+            if fpath.exists():
+                if not self.is_story_produced(fname):
+                    selected_file = fpath
+                    selected_title = short_title
+                    selected_display_title = full_display_title
+                    print(f'  ✅ Found next unproduced master novel in priority queue: {fname}')
+                    break
                 else:
-                    chap_text = f"अध्याय {chap} का भावनात्मक विस्तार..."
+                    print(f'  ⏩ Skipping already produced novel: {fname}')
 
-            chapters.append(chap_text)
-            print(f"    ✨ Chapter {chap} complete: {len(chap_text.split())} words.")
-            time.sleep(1)
+        # 2. Check any other local Hindi txt files if priority list is exhausted
+        if not selected_file:
+            local_dramas = self.hunt_local_dramas()
+            for d in local_dramas:
+                if not self.is_story_produced(d['file']):
+                    selected_file = Path(d['path'])
+                    selected_title = d['title']
+                    selected_display_title = f"{d['title']} | Hindi Audio Story | {channel_name}"
+                    print(f"  ✅ Selected unproduced local drama: {d['file']}")
+                    break
 
-        full_novel_text = "\n\n---\n\n".join(chapters)
-        total_w = len(full_novel_text.split())
-        print(f"\n🎉 [AutoDramaHunter] Mega Drama Novel Completed: {total_w} words!")
+        # 3. If ALL local novels are completed, crawl the next serialized Hindi drama from web!
+        if not selected_file:
+            print('  🌐 All local master novels completed! Crawling next live serialized Hindi novel...')
+            try:
+                from story_engine.advanced_scraper import AdvancedStoryScraper
+                scraper = AdvancedStoryScraper()
+                scraped = scraper.crawl_next_drama_series(min_chapters=20)
+                if scraped and scraped.get('file_path'):
+                    selected_file = Path(scraped['file_path'])
+                    selected_title = scraped.get('title', 'नई दर्दभरी प्रेम कहानी')
+                    selected_display_title = f"{selected_title} | Full Serialized Drama | {channel_name}"
+            except Exception as e:
+                print(f'  Web crawling notice: {e}')
 
-        safe_t = re.sub(r'[^\w\-_\. ]', '_', topic)[:30].strip().replace(' ', '_')
-        out_file = INPUT_STORIES_DIR / f"ai_drama_{safe_t}_{total_w}w.txt"
-        out_file.write_text(full_novel_text, encoding="utf-8")
-        print(f"  💾 Saved novel to: {out_file}")
+        # If still None, loop back to the first master novel
+        if not selected_file:
+            selected_file = INPUT_STORIES_DIR / PREFERRED_LOCAL_ORDER[0][0]
+            selected_title = PREFERRED_LOCAL_ORDER[0][1]
+            selected_display_title = PREFERRED_LOCAL_ORDER[0][2]
+            print(f'  🔄 Restarting cycle with master classic: {selected_file.name}')
+
+        raw_text = selected_file.read_text(encoding='utf-8')
+        word_count = len(raw_text.split())
+        approx_hours = round(word_count / 8500, 1)
+        story_id = selected_file.stem.lower().replace('-', '_')
+
+        print(f'  📖 Story File:   {selected_file.name}')
+        print(f'  🏷️ Title:        {selected_title}')
+        print(f'  📊 Word Count:   {word_count:,} words (~{approx_hours} Hours continuous)')
+        print(f'  📺 YouTube Kit:  {selected_display_title}')
+
+        # 4. Parse full novel into complete scene tasks with DramaScriptBuilder
+        print('\n  🎭 Converting full text paragraph-by-paragraph with DramaScriptBuilder...')
+        from story_engine.dialogue_parser import DramaScriptBuilder
+        builder = DramaScriptBuilder()
+        script_data = builder.build_full_audio_drama_script(
+            raw_text=raw_text,
+            title=selected_title,
+            add_climax_hook=True
+        )
+
+        script_path = SCRIPTS_DIR / f'master_{story_id}.json'
+        script_path.write_text(json.dumps(script_data, indent=2, ensure_ascii=False), encoding='utf-8')
+        total_scenes = len(script_data.get('scenes', []))
+        print(f'  ✅ Generated master drama script with {total_scenes} complete scenes!')
+        print(f'  💾 Saved to: {script_path}')
+
+        # 5. Update produced_stories.json with in_progress
+        db['current_in_progress'] = {
+            'story_id': story_id,
+            'title': selected_title,
+            'file_name': selected_file.name,
+            'word_count': word_count,
+            'approx_hours': approx_hours,
+            'started_at': datetime.datetime.utcnow().isoformat() + 'Z'
+        }
+        self._save_produced_db(db)
+
+        leads = script_data.get('characters', {})
+        hero = leads.get('HERO', 'नायक')
+        heroine = leads.get('HEROINE', 'नायिका')
 
         return {
-            "title": topic,
-            "path": str(out_file),
-            "words": total_w,
-            "approx_hours": round(total_w / 8500, 1),
-            "raw_text": full_novel_text
+            'story_id': story_id,
+            'title': selected_title,
+            'display_title': selected_display_title,
+            'script_path': str(script_path),
+            'source_file': selected_file.name,
+            'word_count': word_count,
+            'approx_hours': approx_hours,
+            'hero_name': hero,
+            'heroine_name': heroine,
+            'total_scenes': total_scenes
         }
 
+    def mark_story_completed(
+        self,
+        story_id: str,
+        youtube_id: str,
+        youtube_url: str,
+        duration_seconds: float = 0.0
+    ):
+        """Records completed video details in produced_stories.json persistent database."""
+        db = self._load_produced_db()
+        in_prog = db.get('current_in_progress') or {}
+
+        record = {
+            'story_id': story_id,
+            'title': in_prog.get('title', story_id),
+            'file_name': in_prog.get('file_name', ''),
+            'word_count': in_prog.get('word_count', 0),
+            'approx_hours': round(duration_seconds / 3600.0, 2) if duration_seconds else in_prog.get('approx_hours', 0),
+            'youtube_id': youtube_id,
+            'youtube_url': youtube_url,
+            'status': 'completed',
+            'completed_at': datetime.datetime.utcnow().isoformat() + 'Z'
+        }
+
+        db['produced_stories'] = [s for s in db.get('produced_stories', []) if s.get('story_id') != story_id]
+        db['produced_stories'].append(record)
+        db['current_in_progress'] = None
+        self._save_produced_db(db)
+
+        print('\n' + '=' * 76)
+        print(' ✅ STORY PERMANENTLY RECORDED IN AUTOPILOT DATABASE!')
+        print(f'   Story ID:    {story_id}')
+        print(f'   YouTube ID:  {youtube_id}')
+        print(f'   YouTube URL: {youtube_url}')
+        print('=' * 76)
+
     def hunt_and_select(self) -> Dict[str, Any]:
-        """Interactive hunt interface for 30k-40k words dramas."""
-        print("\n" + "=" * 76)
-        print(" 🎯 AUTO DRAMA HUNTER: 30k - 40k WORDS MEGA DRAMAS (3 TO 4 HOURS) 🎯")
-        print("=" * 76)
-        print(" 🔍 Filtering STRICTLY for High-Stakes Emotional Dramas (No small stories!)")
-        print("=" * 76)
-
+        """CLI Interactive interface for manual selection."""
         local_dramas = self.hunt_local_dramas()
-        print(f"\n📚 [Found {len(local_dramas)} Verified 30k-40k Words Mega Dramas in Local Archive]:")
+        print('\nFound local dramas:')
         for i, d in enumerate(local_dramas):
-            print(f" [{i}] {d['title']}")
-            print(f"     📊 Words: {d['words']:,} | ⏱️ Duration: ~{d['approx_hours']} Hours")
-            print(f"     📁 File: {d['file']}\n")
+            print(f" [{i}] {d['title']} ({d['words']} words, ~{d['approx_hours']} hrs)")
+        return self.get_next_autopilot_drama()
 
-        print(" [A] 🤖 AI Auto-Generate 35,000 Words Custom Drama Novel (10 Chapters via Gemini)")
-        print(" [W] 🌐 Crawl Live Web Series (Pratilipi / Wattpad 25-30 Chapters)")
-        print(" [0] ❌ Exit")
-
-        sel = input(f"\nSelect Drama (0-{len(local_dramas)-1} or A/W, default: 0): ").strip()
-        if not sel or sel == "0":
-            return local_dramas[0]
-        elif sel.upper() == "A":
-            topic = input("Enter Drama Topic (default: अरेंज मैरिज और कोल्ड हसबैंड की नफ़रत): ").strip() or "अरेंज मैरिज और कोल्ड हसबैंड की नफ़रत"
-            return self.generate_ai_drama_novel(topic=topic)
-        elif sel.upper() == "W":
-            url = input("Enter Pratilipi or Wattpad Series URL: ").strip()
-            from story_engine.advanced_scraper import AdvancedStoryScraper
-            res = AdvancedStoryScraper().scrape(url, max_chapters=30)
-            return {
-                "title": res["title"],
-                "path": str(INPUT_STORIES_DIR / f"crawled_{res['title'][:20]}.txt"),
-                "words": res["word_count"],
-                "approx_hours": round(res["word_count"] / 8500, 1),
-                "raw_text": res["raw_text"]
-            }
-        else:
-            try:
-                idx = int(sel)
-                return local_dramas[idx % len(local_dramas)]
-            except ValueError:
-                return local_dramas[0]
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     hunter = AutoDramaHunter()
-    selected = hunter.hunt_and_select()
-    print("\n" + "=" * 76)
-    print(" ✅ DRAMA SELECTED SUCCESSFULLY!")
-    print(f"  Title:    {selected['title']}")
-    print(f"  Words:    {selected['words']:,} words (~{selected['approx_hours']} Hours)")
-    print(f"  Location: {selected['path']}")
-    print("=" * 76)
+    drama = hunter.get_next_autopilot_drama()
+    print(f"Selected: {drama['title']} with {drama['total_scenes']} scenes!")
