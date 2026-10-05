@@ -8,12 +8,13 @@ tokens/
 *.token
 *.pickle
 
-# Audio & Video Outputs & Large media
+# Runtime Generated Audio & Video Outputs
 output/
-*.wav
-*.mp3
+assets/bgm/*.wav
+assets/bgm/*.mp3
+assets/bgm/*.ogg
 *.mp4
-*.ogg
+*.temp.mp3
 *.raw.wav
 
 # Python Cache & IDE
@@ -23,3 +24,7 @@ __pycache__/
 .vscode/
 .idea/
 .pytest_cache/
+
+# Explicitly TRACK Voice Samples (Crucial Reference Audio for TTS Voice Clones)
+!voice_samples/
+!voice_samples/*.wav
