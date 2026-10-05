@@ -1,0 +1,457 @@
+{
+  "title": "Sad Love Story in Hindi",
+  "genre": "Desi Romance & Emotional Twist Drama",
+  "synopsis": "“Sad Love Story in Hindi | रुलाने वाली लव स्टोरी” एक ऐसी प्यार की दर्द भरी प्रेम कहानी जो आपके दिल को छू जाएगी। मोहब्बत, इंतज़ार और बिछड़ने की कसक से भरी यह कहानी आपके आँसू रोक नहीं पाएगी।",
+  "bgm_theme": "romantic_sad_piano",
+  "characters": {
+    "HERO": "रिशभ",
+    "HEROINE": "आन्या",
+    "NARRATOR": "कथावाचक"
+  },
+  "source_url": "https://storyinhindi.net/sad-love-story-in-hindi/",
+  "total_paras": 36,
+  "total_words": 1123,
+  "scenes": [
+    {
+      "character": "HERO",
+      "mood": "crying",
+      "text": "Sad Love Story in Hindi | रुलाने वाली लव स्टोरी",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "एक ऐसी प्यार की दर्द भरी प्रेम कहानी जो आपके दिल को छू जाएगी। मोहब्बत, इंतज़ार और बिछड़ने की कसक से भरी यह कहानी आपके आँसू रोक नहीं पाएगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "heartbroken",
+      "text": "कभी-कभी मोहब्बत अधूरी रहकर भी ज़िंदगी भर हमारे साथ रहती है। यह कहानी",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "heartbroken",
+      "text": "Sad Love Story in Hindi | रुलाने वाली लव स्टोरी",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "heartbroken",
+      "text": "है रिशभ और आन्या की सच्चा प्यार कि एक अधूरी महब्बत की दर्द भरी दास्तान हे, शयेद ऊपर बाला की मर्जी कुछ अलग था जो किस्मत ने उन्हें साथ नहीं रहने दिया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "हर पल की याद, हर अधूरा ख्वाब, और हर वो",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "जो दिल में रह गया…यही तो बनाते हैं एक रुलाने वाली लव स्टोरी अगर आपने कभी किसी को सच्चे दिल से चाहा है, तो ये कहानी आपको ज़रूर छू जाएगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "सर्दियों की मौसम, एक हल्की खूबसूरत सुबह थी। कॉलेज का पहला दिन, नए चेहरे, नई किताबें, और नई धड़कनें। रिशभ जो बेंगलुरु से दिल्ली पढ़ाई के लिए आया था, थोड़ा शर्मीला और सीधा-सादा लड़का था। भीड़ में उसे सिर्फ़ एक चेहरा बार-बार दिख रहा था – आन्या।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "लाल दुपट्टा, हल्की मुस्कान और आँखों में कुछ अजीब-सी गहराई-वो जब भी बोलती, ऐसा लगता जैसे हवा रुक जाती है रिशभ ने पहली बार किसी को इस तरह महसूस किया था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "लाइब्रेरी में, क्लास में, कैंटीन में – जहाँ भी जाता, आन्या का चेहरा जैसे उसका पीछा करता था। धीरे-धीरे दोनों की बातें शुरू हुईं। शुरुआत",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "हेलो",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "से हुई थी, लेकिन अब वो हर दिन एक-दूसरे का इंतज़ार करने लगे थे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "कॉलेज का हर कोना अब उनके नाम से गूंजता था। दोनों को किताबें पढ़ना पसंद था, रिशभ को शायरियाँ, और आन्या को पुरानी प्रेम कहानियाँ।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "प्यार अगर सच्चा हो, तो हर जन्म में दोबारा मिलता है न?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "अगर सच्चा हो, तो एक जन्म ही काफी है…",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "heartbroken",
+      "text": "उनकी बातें अब दिल के अंदर उतर चुकी थीं। कॉफी शॉप की वो शाम, जब दोनों बारिश में भीगते हुए एक ही छतरी के नीचे खड़े थे, वो रिशभ की ज़िंदगी का सबसे खूबसूरत पल था। लेकिन किस्मत को शायद कहानियाँ अधूरी पसंद थीं –",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "कॉलेज का आखिरी साल था। सब कुछ ठीक था, जब तक कि आन्या के पापा का ट्रांसफर लखनऊ नहीं हो गया। आन्या को अचानक कॉलेज छोड़ना पड़ा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "जाने से पहले उसने रिशभ से कहा –",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "मैं वापस आऊँगी – वादा करती हूँ।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "रिशभ ने उस वादे को अपनी साँसों की तरह संभाल लिया। हर सुबह उसका पहला काम होता – आन्या का मैसेज देखना, लेकिन दिन, हफ़्ते, फिर महीने बीत गए – कोई जवाब नहीं आया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "रिशभ ने कई बार कॉल किया, मैसेज किया – लेकिन सब",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "डिलीवर",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "नहीं हुए। वो हर शाम उस पार्क में जाता जहाँ दोनों बैठा करते थे, और हवा से बात करता –",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "शायद आज वो लौट आए",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "ज़िंदगी अपने रास्ते पर चल पड़ी थी, पर रिशभ की ज़िंदगी वहीं रुकी थी जहाँ आन्या ने",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "heartbroken",
+      "text": "अलविदा",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "कहा था। वो अब एक जर्नलिस्ट था – अपने काम में सफल, लेकिन अंदर से ख़ाली।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "एक दिन ऑफिस में ख़बर आई –",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "heartbroken",
+      "text": "लखनऊ में एक सड़क हादसे में महिला की मौत।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "रिशभ को उस खबर में सिर्फ़ एक नाम दिखा – आन्या शर्मा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "उसके हाथ से कॉफ़ी का कप गिर गया। साँसें भारी हो गईं। वो रातभर जागता रहा, यकीन नहीं कर पा रहा था कि उसकी दुनिया सच में खत्म हो गई।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "एक महीने बाद, डाक से एक पुराना लिफ़ाफ़ा आया – भेजने वाली: आन्या शर्मा। रिशभ के हाथ काँप गए। उसने लिफ़ाफ़ा खोला, और अंदर से एक चिट्ठी गिरी –",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "“रिशभ,जब मैं लखनऊ आई, मुझे पता चला कि मुझे दिल की बीमारी है। डॉक्टर ने कहा कि मैं ज़्यादा दिन नहीं जी पाऊँगी। इसलिए मैंने खुद को तुमसे दूर कर लिया, क्योंकि मैं नहीं चाहती थी कि तुम मुझे ऐसे हाल में देखो।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "तुमने मुझसे वादा लिया था कि मैं लौटकर आऊँगी – और हाँ, मैं लौटी हूँ, इस ख़त के ज़रिए – अगर अगले जन्म में मिलूँ,तो मुझसे फिर वही कॉफी पिलवाना।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "रिशभ ने वो ख़त सीने से लगाकर कहा –",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "तुम इस बार भी झूठ नहीं बोली, आन्या – सच में लौट आई।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "रिशभ ने उस ख़त को फ्रेम में लगाकर अपने कमरे की दीवार पर टाँग दिया। हर सुबह वो उसी को देखकर मुस्कुराता था, जैसे अभी भी आन्या उसके सामने बैठी हो।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "उसने किसी और से कभी प्यार नहीं किया। ना शादी की, ना किसी और को दिल दिया। वो कहता था –",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "जिसने एक बार सच्चा प्यार किया,उसे दोबारा मोहब्बत करने की ज़रूरत नहीं होती।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सालों बाद, जब रिशभ बूढ़ा हो गया, लोगों ने उसके कमरे में वो ख़त और एक फोटो पाई – जिसके नीचे लिखा था:",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "अब हम दोनों को किसी कॉफी की ज़रूरत नहीं…क्योंकि अब हम हमेशा साथ हैं।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "heartbroken",
+      "text": "सच्चा प्यार कभी खत्म नहीं होता – वो मौत से नहीं, बल्कि यादों में ज़िंदा रहता है। कभी-कभी मोहब्बत का सबसे खूबसूरत रूप",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "heartbroken",
+      "text": "इंतज़ार",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "वो आख़िरी ख़त",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "Sad Love Story in Hindi | रुलाने वाली लव स्टोरी",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "है जो हमें यह सिखाती है कि सच्चा प्यार हमेशा आपने दिल के अंदर मौजूद रहता है, चाहे कितना भी वक्त बदल क्यों ना जाए, आपने को भूलना ना मुमकिन हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "प्यार का असली मतलब",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "हासिल करना या पाना",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "नहीं होता हे, बल्कि उस महब्बत को ईमानदारी से",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "निभाना",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "भी होता है। और कुछ लोग, जैसे रिशभ और आन्या, प्यार को सिर्फ़ जिया नहीं करते – वो उसे हमेशा के लिए अमर कर देते हैं। दोस्तों आपको",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "रिशभ और आन्या",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "Sad Love Story in Hindi | रुलाने वाली लव स्टोरी",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "बारेमे किया राई हे कमेंट करके जरूर बताई।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "A. इस कहानी में",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "Sad Love Story in Hindi – वो आख़िरी ख़त",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "सबसे भावुक पल वह है जब रिशभ को कई साल बाद आन्या का भेजा हुआ आख़िरी ख़त मिलता है, जिसमें वह अपनी बीमारी और अपने प्यार के बारे में सच बताती है। यही पल इस कहानी में सबसे भाबुक पल हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "A. हाँ, रिशभ ने बहुत बार आन्या से कॉन्टेक्ट करने की कोशिश की फोन, मैसेज और सोशल मीडिया के जरिए। लेकिन आन्या ने जानबूझकर खुद को रिशभ से दूर कर लिया था, ताकि रिशभ उसे इस बीमारी की हालत में ना देखे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "A. क्योंकि आन्या ने नहीं चाहती थी कि रिशभ अपनी पूरी ज़िंदगी उसकी बीमारी और डर में काटे। वह चाहती थी कि रिशभ अपनी पढ़ाई और करियर पर ध्यान दे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "A. क्योंकि यह कहानी बताती है कि प्यार हमेशा साथ रहने का नाम नहीं, कभी-कभी प्यार चुपचाप किसी की खुशी के लिए खुद को पीछे हटाने का नाम भी होता है।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "A. नहीं। कहानी में साफ दिखाया गया है कि रिशभ ने अपनी पूरी ज़िंदगी आन्या की प्यार को दिल में रखकर अकेले गुज़ार दी। रिशभ केलिए प्यार",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "बदलने",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "की चीज़ नहीं थी, आन्या एक बार रिशभ के दिल में बसा, तो हमेशा के लिए बस गया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    }
+  ]
+}

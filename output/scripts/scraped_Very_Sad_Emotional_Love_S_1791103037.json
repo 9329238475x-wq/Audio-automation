@@ -1,0 +1,748 @@
+{
+  "title": "सुजाता और सुभाष की बेपनाह मोहब्बत की दास्तान",
+  "genre": "Desi Romance & Emotional Twist Drama",
+  "bgm_theme": "romantic_sad_piano",
+  "characters": {
+    "HERO": "सुभाष",
+    "HEROINE": "सुजाता",
+    "NARRATOR": "कथावाचक"
+  },
+  "total_scenes": 105,
+  "scenes": [
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "बारिश की उस तूफानी रात में... जब सुभाष भीगता हुआ उस सूने घर के बंद दरवाजे को पागलों की तरह पीट रहा था, तब उसे नहीं पता था कि उसकी ज़िंदगी, उसकी सुजाता... उसे हमेशा के लिए छोड़कर जा चुकी है!",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "crying",
+      "text": "सुजाता! प्लीज दरवाजा खोलो... तुम मुझे ऐसे छोड़कर नहीं जा सकतीं! बाहर आओ सुजाता... सिर्फ एक बार मेरी बात सुन लो!",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "लेकिन अंदर सिर्फ़ सन्नाटा था। न कोई आवाज़, न कोई जवाब... सब कुछ एक पल में राख हो चुका था! पर यह बर्बादी उस रात नहीं हुई थी... यह रूह कंपा देने वाली दास्तान शुरू हुई थी तीन महीने पहले, जब दोनों की नज़रें पहली बार टकराई थीं...",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "और जब बही प्यार नहीं मिलता हे तो बह प्रेमी की हालत किया होता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "ये कहानी सुभास और सुजाता की हे। जो पश्चिम बंगाल की मेदनीपुर में रहते हे। सुभास Computer Coaching Centre में भर्ती हुआ था Computer सिखने के लिए। और बो पहला दिन था जब सुभास Computer सिखने Coaching Centre में आया था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास ने आपने कुर्शी पे बैठा Computer की किताब पड़ रहा था, तभी उसकी नजर Computer class की मैन गेट की तरफ गयी। एक सुन्दर सांवला सा लड़की उसीके तरफ आ रही थी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "बह लड़की सुभास की बगल बाली कुर्शी पे आ कर बैठ गया। बह लड़की ने Computer को ऑन किया और Computer सिखने लग गया। उस लड़की को देखकर सुभास का मन Computer में बिलकुल भी नहीं लग रहा था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास ने उस लड़की से बात करने की बहुत कोसिस की लेकिन मौका ही नहीं मिला। बह Computer ऑन करके बैठ गया और लड़की को एक नजर से देखता रहा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "लड़की की उंगलिया Computer keyboard पर ऐसी चल रही थी की ऐसा लगरहा हे की हारमोनियम की स्केल पर उनका उंगलिया चला रहा हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "angry",
+      "text": "किया देख रहेहो?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "आपको Computer keyboard पर टाइप करते हुए देख रहा हु।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "angry",
+      "text": "यहाँ किया करने आये हो?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "Computer सिखने।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "angry",
+      "text": "ऐसा सीखोगे?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "Computer Class में आज मेरा पहला दिन हे इसलिए मुझे कुछ भी समझ में नहीं आ रहा हे। आप Computer चला रही थी तो इसलिए मेने आपको देखने लगा की आप कैसे Computer चला रहेहो।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "आपको Computer चलते हुए देखा तो मुझे ऐसा लगा की में भी सिख जाऊंगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "Computer छोड़कर अगर तुम मुझे ही देखते रहोगे तो तुम कभी भी Computer नहीं सिख पाओगे",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "। लड़की ये बात कहकर फिर से Computer चालने लग गया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास भी Computer की keyboard देखकर Type करने लग गया। सुभास को Type करने में बिलकुल भी मन नहीं लग रहा था बो खुद को बहुत ही बेचैन Fill कर रहा था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "थोड़ी देर बाद सुभास ने गलत Type की और Computer में दूसरा Function आ गया और आएगा भी क्यों नहीं सुभास को Computer में थोड़ी ही ध्यान था, ध्यान तो दूसरी जगह पर था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "तब लड़की ने सुभास की keyboard आपने तरफ लिया और Computer की Function को ठीक करने लगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "लो आपकी Computer ठीक हो गया",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "। लड़की फिर से आपने Computer चलने लगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "लेकिन सुभास की मन बिलकुल भी Computer में नहीं था बो तो लड़की से थोड़ा बात करने की मौका ढूंढ़ता रहा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "“मन नहीं लग रहा हे” मुझे लगता हे की आप Computer सिख नहीं पाओगे, देखके तो कुछ ऐसा ही लग रहा हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "सुभास को बात करने में बेचें था इसलिए बो सवाल पूछ लिया, आपका नाम?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "सुजाता।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "वहुत ही अच्छा नाम हे आपका।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "लेकिन मुझे इस नाम से वहुत ही नफरत हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "क्यों इस नाम से नफरत हे आपको?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "नाम से नफरत करने कारन थोड़ी ना हे, ये कहते हुए सरिता Computer बंद करके Class से वहार जाने लगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "सुभास ने सुजाता को जाते हुए सिर्फ एक नजर में देखता ही रहा। सुजाता के जाने की बाद सुभास को अकेला पन महसूस हो रहा था। सईद सुभास को सुजाता से प्यार जो गया था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "सुभास को जब प्यार की एहसास हुआ तो उसकी जिंदगी ही बदल गया। रातो की नींद उड़ गयी बो रातो रातो आपने घर की छत पे घूमता था तारे गिनता था और ना जाने किससे मन ही मन में बात करता था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "खुली आसमान में चाँदनी रात में प्यार की कविताएँ लिखना, मन ही मन गुनगुनाने लगा, दुनिया रंगीन होने लगा, ना जाने कैसे कोई किलोमीटर पैदल ही घूमकर चला आता।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "ना जाने सुभास को किया हो गया। सुभास ने अपने एक करीबी दोस्त को इस परिस्थिति की बारे में बताया। तो सुभास की दोस्त ने कहा Boss तुम्हे प्यार जो गया हे। दोस्त की बात सुनकर सुभास को बहुत ही अच्छा लगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "सुभास ने अगले दिन Computer Class में सुजाता से मिला और सुजाता से कहा की , में आपके लिए एक कविताएँ लिखा हु। में चाहता हु की आप ये कविताएँ पड़े।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "“जान ना पहचान तुम मेरा मेहमान” , तुम मेरे बारेमे कितना जानते हो?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "आपको जितना भी जनता हु उसी बिचार पर लिखा हु।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुजाता बो कविताएँ पड़ने लगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "कबिता की निचे सुभास की जगह आकाश लिखा था। सुजाता ने उसे देखकर बो कागज सुभास को दे दिया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "में चाहता हु की आप इस कबिता को Computer में Type कर दीजे, इस कविता को छापना हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुजाता कुछ नहीं कहा और कागज को सामने रख कर Type करने लगी। सुभास ने सुजाता को देखता रहा। इस बात की भनक सुजाता को भी था की सुभास मझे देखता हे। लेकिन सुभास को कुछ नहीं बोलै।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "किया आप कबि हे?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "नहीं लेकिन बनने की कोशिश कर रहा हु।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "कबि भगोड़े होता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुजाता की इस Comment सुनकर सुभास जगमगा गया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "एक कभी आपने खुसी केलिए कविताएँ लिखता हे और लिखते बक्त वह सिर्फ कबिता के बारेमे ही सोचता हे। उसके बाद कबि ने बो कबिता को उसके हल पर ही छोड़ देता हे। और कबिता जब मुसीबत में पड़ती हे तो कबि कभी भी कबिता की पक्ष में खड़ा नहीं होता।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "ये आप यकीन के साथ कैसे कहे सकती हे?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "में ये मान ती हु की आदमी की जिंदगी भी एक कबिता से कम नहीं हे, मेरे जिंदगी भी एक कबिता हे। मेरा जिंदगी मुझे ही अच्छी नहीं लगती। इसलिए मुझे भी कबिता भी अच्छी नहीं लगती।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "वह तो कबिता से कम नहीं हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "नहीं, ये कबिता नहीं कबिता की प्रलाप हे, उसकी तड़फ जो उस कबि की कारन लिखी हे, जिसने मेरा जीबन की रचना की, इतना कहकर सुजाता ने Computer Class से वहार चली गयी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "और सुभास ने मन ही मन में सोचता रहा",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "किसी हे ये",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "आज उन्हने बहुत बाते की। उन दोनों की बाते देखकर Computer Class की Madam ने सुजाता की पास आकर पूछा, आजकल तुम बहुत ही खुश नजर आ रहे हो सुजाता।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "Madam की कहने पर सुजाता ने सिर्फ मुस्कुराया। और सुभास भी मुस्कुराया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास ने सोचा की",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "romantic",
+      "text": "तो किया प्यार की एहसास सुजाता को भी हो रहा हे",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "अगले दिन से ही एक हपता तक सुजाता ने Computer Class में नहीं आया। सुभास बहुत ही परिसन था। सुभास रोज Computer Class में सुजाता की इंतजार करते करते बापस निराश हो कर घर बापस चला जाता।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "एक हप्ता बाद जब सुजाता ने Computer Class में आयी तो सुभास ने पूछा की एक हपता कहा थी? Computer Class में क्यों नहीं आया?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "आपने जीबन में वहुत परिशानी हे। ये कहते हुए आपने सीट पर बैठ गया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "किया हुआ मुझे बताओ?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "परिशानी मेरे बेहैन को लेकर जो BA की पढ़ाई कर रहा हे। बो किसी लड़के के साथ भाग गया और वह दोनों शधी किये बिना एक साथ रहे रही हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "आपकी बेहैन ऐसा क्यों किया?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "मेरी बेहैन की कहना हे की, अगर वह ऐसा नहीं करती तो उसकी शादी कभी भी नहीं पाती।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "इसका मतलब?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "इसका कारन हमारे घर की आर्थिक परिस्थिति। इतना कहकर सुजाता चुप हो गया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "तो मुझे लगता हे की आपकी बेहैन ने कुछ गलत किया हे। आज की युबा Independent हो गया हे, वह पुराणी परमपरा को तोड़ कर नया नैतिकता के साथ चलना चाहते हे। देखना बक्त की साथ साथ सब कुछ ठीक हो जायेगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "लेकिन घर बालो तो नहीं मानती हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "हा ये बात सच हे की उनके लिए ये बात मानना थोड़ा मुश्किल हे लेकिन आजकल एहि तो चल रहा हे। हमारे समाज बदल रहा हे, बिना शादी के एक साथ रहना पश्चिमी परंपरा हे लेकिन अब ऐसा भी हमारे यह भी धीरे धीरे चल रहा हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "हा, ये बात सही हे की हाथ में हाथ धरे बैठकर सपनो की राजकुमार की इंतजार से तो अच्छा हे की जो हमारे हाथ थाम ले उसीके साथ जिंदगी गुजर ना।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "सुभास ने सोचा – की कहे दे की हम आपसे प्यार करता हु और आपसे शादी करना चाहता हु पर बाह ये बात कहे नहीं पाया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "romantic",
+      "text": "जानते हो सुभास मेरा एक बेहैन 12 बी में पड़ रहा हे और उसका भी एक लड़का के साथ प्रेम चल रहा हे और वह एक दूसरे से शादी करना चाहता हे। अगले साल ही उसका 18 साल पूरा हो जायेगा और वह दोनों शादी कर लेगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुजाता की ये बात सुनकर सुभास की मन ने आया की कहे दे की अच्छा ही हे बह आपने आप अपने लिए जीबन साथी ढूंढ ले। तो तुम्हे कोई भी परिशानी का सामना नहीं करना पड़ेगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "5500 की नकरी में तुम कौन सा राजकुमार उनकेलिए ला दोगी, इससे अच्छा हे की बह आपने आपने पसंद का लड़का से शादी कर ले।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "बातों बातों में सुजाता ने सुभास को एक दिन बताया था की, उसके पिताजी का बहुत दिन पहले मृत्यु हो चुकी हे और बह 3 बेहेन हे और उसका कोई भी भाई नहीं हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "बेहेन में सबसे बड़ी बह ही हे और बह एक छोटा सा ऑफिस में काम करती हे और उसे 5500 मासिक बेटन मिलती हे। और बह दूसरा अच्छा जगह काम के लिए Computer सिख रही हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "में भी सोचता हु की एक बेहेन जो किया बह ठीक ही किया और दूसरा बेहेन ने जो भी करेगा बह भी अच्छी हे। ये जीबन एक संघर्ष हे तो हम बेसहारा करे तो किया किया करे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "प्रेमी से पति बना इंसान भी बेबफा कर सकती हे और जीबन भी नरक बन सकती हे। और माता-पिता का खोजै हुआ लड़का भी एहि करता हे तो किया करे। लेकिन माँ तो नहीं मानती।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सोचती बहुत हे लेकिन सोचते सोचते खुद का तबियत ख़राब कर लेता हे, पुराने ज़माने की हे ना इसलिए। सबसे दुःख की बात ये हे की माँ ने केहेती हे की, तू भी भाग जा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "में उन्हें इस हल में अकेला छोड़ कर किसके साथ",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "ये कहते हुए सुजाता ने रो पड़ी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास को समझ में नहीं आ रहा था की बह किया कहे और किया करे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "परिस्थिति को सुजाता ने समझ लिया और खुद को काबू कर लिया और फिर से Type करने लग गयी। थोड़ी देर बात सुजाता बिना कुछ कहे बहा से चली गयी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास को एक बार ऐसा लगा की बह सुजाता की पीछे पीछे चला जाये लेकिन बह बैठा रहा और सुजाता को जाते हुए देखने लगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "आसमान में चारो तरफ बदल घेर आये थे इसलिए चारो तरफ अँधेरा हो गया था। जोरो से आसमान में बिजली करक रही थी और बदल गरज रहा था। ऐसी हालत में भी सुभास ने Computer Class में जाने केलिए तैयार था। क्यूंकि बह सुजाता से मुलना चाहता था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "जब सुभास ने घर से बहार निकला तब थोड़ा थोड़ा बारिस गिरने लगा फिर भी सुभास तेजी से Computer Class की तरफ बढ़ने लगा। कुछ दूर बारिश बहुत ही तेज हो गया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सड़क पर चल रहा लोग तेज बारिश की बजह से भागकर किसी छबनि में खड़े हो गया लेकिन सुभास ने भीगता हुआ सुजाता से मिलने की तड़फ में Computer Class की तरफ चलने लगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "Institute में आकर पता चला की सुजाता ने आज नहीं आया। Institute की Madam ने कहा की इतना बारिश में आने की किया जरुरत थी?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास ने Madam को कहा, आप नहीं समझेंगे?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "में सब समझती हु लेकिन सुजाता ने अब यहाँ कभी भी नहीं आएगी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "क्यों? आपको कैसे पता?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HEROINE",
+      "mood": "cinematic",
+      "text": "की जड़ी आप आओ तो बता दू।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "Madam वह कभी नहीं आएगी?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "सुभास की ये आवाज दिल को मरोर रहा था। सुभास Institute से बहार आ गया। और बहार बहुत तेजी से मूसलाधार बारिश हो रहा था। सुभास ने मूसलाधार बारिश की परबा ना करते हुए आपने घर की तरफ चल पड़ा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "थोड़ी दूर जाने के बाद बह सोचने लगा की बह सुजाता की घर में जायेगा लेकिन सुजाता की घर की पाता सुभास की पास नहीं था। और उसकी घर की पाता Madam दे सकती हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "ये सोच कर सुभास ने फिर से Institute की तरफ आने लगा लेकिन तब तक Institute बंद हो चूका था। सुभास ने भीगते हुए घर पहुंचा तब तक सुभास की शरीर तेज भुखार से तपने लगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "लगभग 15 दिन सुभास भुखार से बिस्तर पर पड़ा रहा। जब बुखार ठीक हुआ तब 20 दिन बाद सुभास ने Institute पहुंचा लेकिन मैडम नहीं मिली। ये सिलसिला काफी देर तक चला लगभग 15 दिन तक।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "16 बी दिन सुभास को मैडम मिली। मैडम ने सुभास को देखते हुए कहा की की, सुभास तुम काफी कमजोर हो गए हो?",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "और Madam ने एक कागज पर लिखा और सुभास को दे दिया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुभास Madam को Thankyou बोलकर बहा से सुजाता की घर की तरफ चल पड़ा। जब सुभास ने सुजाता की घर पे पहुंचा तो देख की घर पे ताला लगा हुआ था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "पडोसी से पूछा तो पता चला की सुजाता माकन बेचकर यह से चली गयी। सुभास ने बहा का बहुत लोगो से पूछा लेकिन सुजाता की नया घर का पता किसीके पास नहीं था। निराश हो कर सुभास आपने घर लोट आयी।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "सुजाता की इस ब्यबहार से सुभास को काफी धक्का लगा। उसे कुछ भी समझ नहीं आ रहा था, सुजाता ने मेरे साथ क्यों किया? बह सुजाता की यद् में कविताएँ लिखने लगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "एकदिन सुभास ने एक सपना देखा और उसकी भाबनाओ को कबिता की रूप में लिख दिया। सुभास की इस कबिता को पत्रिका में छपे 2 महीनो से भी अधिक हो गया था।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "लेकिन अभी भी सुजाता की कोई चिठ्ठी या फ़ोन नहीं आया था। सुभास को बिस्वास था की एक ना एक दिन सुजाता मुझे जरूर संपर्क करेगा। जब से सुभास ने बह कबिता पत्रिका में छापी हे तब से कोई भी फ़ोन आता हे तो सुभास चौक जाता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "और हर रोज पोस्ट मैन की इंतजार में घर की बहार बेसब्री से देखती रहती हे। और एहि सोचते सोचते बह उदासी की समुन्दर में दुब जाता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    }
+  ]
+}

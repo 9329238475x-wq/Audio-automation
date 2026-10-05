@@ -1,0 +1,84 @@
+{
+  "title": "Very Sad Emotional Love Story in Hindi",
+  "genre": "Desi Romance & Emotional Twist Drama",
+  "synopsis": "आज एक ऐसी “Very Sad Emotional Love Story in Hindi” सुजाता और सुभाष की बेपनाह मोहब्बत की दास्तान बताऊंगा जो पढ़कर आप भी रो पड़ोगे। और ये सोचते रहे जाओगे की प्यार ऐसा भी होता हे, जो जिंदगी भर आपने प्यार की इंतजार में आपने पूरा जीबन गुजर देता हे।",
+  "bgm_theme": "romantic_sad_piano",
+  "characters": {
+    "HERO": "सुभाष",
+    "HEROINE": "सुजाता",
+    "NARRATOR": "कथावाचक"
+  },
+  "source_url": "https://storyinhindi.net/emotional-love-story-in-hindi/",
+  "scenes": [
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "आज एक ऐसी  सुजाता और सुभाष की बेपनाह मोहब्बत की दास्तान बताऊंगा जो पढ़कर आप भी रो पड़ोगे। और ये सोचते रहे जाओगे की प्यार ऐसा भी होता हे, जो जिंदगी भर आपने प्यार की इंतजार में आपने पूरा जीबन गुजर देता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "crying",
+      "text": "Very Sad Emotional Love Story in Hindi",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "बहुत ही दुखद भावनात्मक सुजाता और सुभाष की बेपनाह मोहब्बत की प्रेम कहानी। एक ऐसी प्रेम कहानी जो आपको एहसास दिलाया गी की जब प्यार होता हे तो बह कितना खुश होता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "romantic",
+      "text": "Very Sad Emotional Love Story in Hindi",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "और जब बही प्यार नहीं मिलता हे तो बह प्रेमी की हालत किया होता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "crying",
+      "text": "और हर रोज पोस्ट मैन की इंतजार में घर की बहार बेसब्री से देखती रहती हे। और एहि सोचते सोचते बह उदासी की समुन्दर में दुब जाता हे।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "cinematic",
+      "text": "आज की  आप को केसा लगा कमेंट करके जरूर बताना।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "HERO",
+      "mood": "cinematic",
+      "text": "Very Sad Emotional Love Story in Hindi | सुजाता और सुभाष की बेपनाह मोहब्बत की दास्तान",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "ये कहानी का मूल उद्देश्य हे की प्यार तो हम सभी करते हे लेकिन प्यार की इजहार करने में बहुत ही देर कर देता हे। आजकी कहानी पढ़कर आपको पता चला हे की प्यार तो दोनों में ही था लेकिन कोई भी किसी को कहे नहीं पाया।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    },
+    {
+      "character": "NARRATOR",
+      "mood": "romantic",
+      "text": "इसलिए आज सुभास की ये हालत हे, बस एक ही गलती की हे उन्होंने, प्यार तो दिल से किया था लेकिन प्यार की इजहार नहीं कर पाया। आप भी ऐसा गलती ना करे नहीं तो सुभास की तरह गहरा समुन्दर में दुब जाना पड़ेगा।",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
+    }
+  ]
+}

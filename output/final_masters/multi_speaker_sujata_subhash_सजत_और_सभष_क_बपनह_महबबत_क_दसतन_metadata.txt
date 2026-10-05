@@ -1,0 +1,14 @@
+# 📺 YouTube & Podcast Publishing Package
+Title: 💔 सुजाता और सुभाष की बेपनाह मोहब्बत की दास्तान | सच्ची दर्दभरी प्रेम कहानी | Heart Touching Desi Romance Audio Story
+Genre: Desi Love, Romance & Emotional Twist Drama
+Engine: Edge TTS (Testing Mode)
+
+Description:
+"बिछड़ के तुझसे किसी और का होना आसान न था, जो दर्द सीने में दबाया वो बयां करना आसान न था..."
+सुनिए कबीर और आरुषि की एक ऐसी दर्दभरी और रूह कंपा देने वाली प्रेम कहानी, जो आपके दिल को छू जाएगी। जब तीन साल बाद एक अनसुलझा ख़त सामने आता है, तो प्यार और क़ुर्बानी की ऐसी सच्चाई खुलती है जिसे सुनकर आपकी आँखें भर आएँगी।
+
+🎧 सर्वश्रेष्ठ अनुभव के लिए कृपया हेडफ़ोन (Headphones) का उपयोग करें।
+
+Master Audio Files:
+WAV: C:\Audio-automation\output\final_masters\multi_speaker_sujata_subhash_सजत_और_सभष_क_बपनह_महबबत_क_दसतन.wav
+MP3 (320kbps): C:\Audio-automation\output\final_masters\multi_speaker_sujata_subhash_सजत_और_सभष_क_बपनह_महबबत_क_दसतन.mp3

@@ -1,0 +1,47 @@
+{
+  "genres": {
+    "desi_romance_drama": {
+      "name": "Desi Love, Romance & Emotional Twist Drama",
+      "hindi_name": "दर्दभरी व रोमांटिक प्रेम कहानियाँ",
+      "description": "Intense emotional love stories with relatable conflicts, heartwarming romance, unexpected twists, and painful heartbreak.",
+      "default_bgm_mood": "romantic_sad_piano",
+      "characters": {
+        "NARRATOR": {
+          "role": "Narrator / कथावाचक",
+          "gender": "male",
+          "reference_sample": "narrator.wav",
+          "default_mood": "cinematic",
+          "style_description": "Deep, resonant, soulful Hindi narration with dramatic pauses"
+        },
+        "HERO": {
+          "role": "Male Protagonist (Kabir/Sameer)",
+          "gender": "male",
+          "reference_sample": "hero_male.wav",
+          "default_mood": "romantic",
+          "style_description": "Passionate, loving, emotionally intense young male"
+        },
+        "HEROINE": {
+          "role": "Female Protagonist (Aarushi/Simran)",
+          "gender": "female",
+          "reference_sample": "heroine_female.wav",
+          "default_mood": "romantic",
+          "style_description": "Sweet, tender, deeply emotional young female voice"
+        },
+        "RIVAL": {
+          "role": "Rival / Antagonist",
+          "gender": "male",
+          "reference_sample": "rival_male.wav",
+          "default_mood": "angry",
+          "style_description": "Harsh, firm, confrontational male"
+        },
+        "MOTHER": {
+          "role": "Mother / माँ",
+          "gender": "female",
+          "reference_sample": "mother_female.wav",
+          "default_mood": "emotional",
+          "style_description": "Gentle, affectionate, worried Indian mother voice"
+        }
+      }
+    }
+  }
+}
