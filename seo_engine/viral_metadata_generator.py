@@ -87,6 +87,21 @@ Story: {story_title} | Duration: {duration_str}
         data["file_path"] = str(target_path)
         return data
 
+
+    def generate_metadata(self, story_title: str, hero: str = "", heroine: str = "", channel_name: str = "Garib YT", **kwargs) -> Dict[str, Any]:
+        """Convenience method returning direct title, description, and tags for YouTube upload."""
+        kit = self.generate_youtube_kit(story_title=story_title, story_text=f"{hero} aur {heroine} ki dardbhari prem kahani", **kwargs)
+        titles = kit.get("viral_titles", [f"💔 {story_title} | Heart Touching Hindi Love Story | {channel_name}"])
+        title = titles[0] if titles else f"💔 {story_title} | {channel_name}"
+        desc = kit.get("viral_description", f"सुनिए '{story_title}' की एक ऐसी दर्दभरी प्रेम कहानी जो आपके दिल को छू जाएगी।\n\n🎧 Channel: {channel_name}")
+        tags = kit.get("viral_tags", ["hindi love story", "hindi kahaniya", channel_name.lower()])
+        return {
+            "title": title,
+            "description": desc,
+            "tags": tags,
+            "kit": kit
+        }
+
     def _call_gemini_seo(self, title: str, text: str, duration: str) -> Dict[str, Any]:
         """Calls Gemini API to craft high-retention viral YouTube elements."""
         default_data = {
