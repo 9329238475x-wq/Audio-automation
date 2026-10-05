@@ -2,44 +2,177 @@
   "genres": {
     "desi_romance_drama": {
       "name": "Desi Love, Romance & Emotional Twist Drama",
-      "hindi_name": "दर्दभरी व रोमांटिक प्रेम कहानियाँ",
-      "description": "Intense emotional love stories with relatable conflicts, heartwarming romance, unexpected twists, and painful heartbreak.",
+      "hindi_name": "देसी प्रेम, रोमांस एवं भावुक ट्विस्ट ड्रामा",
+      "description": "Radio FM & Pocket FM grade multi-speaker audio drama with 20 distinct voice casts.",
       "default_bgm_mood": "romantic_sad_piano",
       "characters": {
         "NARRATOR": {
-          "role": "Narrator / कथावाचक",
+          "role": "Narrator / सूत्रधार",
           "gender": "male",
-          "reference_sample": "narrator.wav",
+          "age_group": "adult",
+          "reference_sample": "01_narrator_male.wav",
           "default_mood": "cinematic",
-          "style_description": "Deep, resonant, soulful Hindi narration with dramatic pauses"
+          "style_description": "Deep, resonant, soulful Hindi narration with dramatic cinematic pauses"
         },
         "HERO": {
-          "role": "Male Protagonist (Kabir/Sameer)",
+          "role": "Male Protagonist (Hero / नायक)",
           "gender": "male",
-          "reference_sample": "hero_male.wav",
+          "age_group": "young_adult",
+          "reference_sample": "02_hero_romantic_male.wav",
           "default_mood": "romantic",
           "style_description": "Passionate, loving, emotionally intense young male"
         },
-        "HEROINE": {
-          "role": "Female Protagonist (Aarushi/Simran)",
-          "gender": "female",
-          "reference_sample": "heroine_female.wav",
-          "default_mood": "romantic",
-          "style_description": "Sweet, tender, deeply emotional young female voice"
+        "HERO_ANGRY": {
+          "role": "Hero Angry / Heartbroken (गुस्से में नायक)",
+          "gender": "male",
+          "age_group": "young_adult",
+          "reference_sample": "03_hero_angry_male.wav",
+          "default_mood": "angry",
+          "style_description": "Fierce, intense, heartbroken, aggressive young male voice"
+        },
+        "FRIEND_MALE": {
+          "role": "Best Friend (सच्चा दोस्त / यार)",
+          "gender": "male",
+          "age_group": "young_adult",
+          "reference_sample": "04_friend_young_male.wav",
+          "default_mood": "neutral",
+          "style_description": "Casual, supportive, warm, loyal young buddy voice"
+        },
+        "VILLAIN": {
+          "role": "Villain / Antagonist (खलनायक)",
+          "gender": "male",
+          "age_group": "adult",
+          "reference_sample": "05_villain_rough_male.wav",
+          "default_mood": "angry",
+          "style_description": "Harsh, gritty, menacing, arrogant villain voice"
         },
         "RIVAL": {
-          "role": "Rival / Antagonist",
+          "role": "Rival / Competitor (प्रतिद्वंद्वी)",
           "gender": "male",
-          "reference_sample": "rival_male.wav",
+          "age_group": "adult",
+          "reference_sample": "05_villain_rough_male.wav",
           "default_mood": "angry",
-          "style_description": "Harsh, firm, confrontational male"
+          "style_description": "Confrontational, competitive, sharp male voice"
+        },
+        "FATHER": {
+          "role": "Father (पिताजी)",
+          "gender": "male",
+          "age_group": "elderly",
+          "reference_sample": "06_father_emotional_male.wav",
+          "default_mood": "emotional",
+          "style_description": "Affectionate, caring, emotionally burdened Indian father voice"
+        },
+        "FATHER_STRICT": {
+          "role": "Strict Father / Patriarch (सख्त पिता / मुखिया)",
+          "gender": "male",
+          "age_group": "elderly",
+          "reference_sample": "07_father_strict_male.wav",
+          "default_mood": "angry",
+          "style_description": "Authoritative, disciplined, stern, traditional patriarch voice"
+        },
+        "COP_DOCTOR": {
+          "role": "Police Inspector / Doctor (दरोगा / डॉक्टर)",
+          "gender": "male",
+          "age_group": "adult",
+          "reference_sample": "08_cop_doctor_male.wav",
+          "default_mood": "neutral",
+          "style_description": "Firm, grave, authoritative, professional law-enforcer or surgeon voice"
+        },
+        "GRANDFATHER": {
+          "role": "Grandfather (दादाजी / नानाजी)",
+          "gender": "male",
+          "age_group": "elderly",
+          "reference_sample": "09_elder_grandfather_male.wav",
+          "default_mood": "sad",
+          "style_description": "Wise, gentle, trembling, affectionate aged grandfather voice"
+        },
+        "SERVANT_MALE": {
+          "role": "Servant / Helper (नौकर / ड्राइवर)",
+          "gender": "male",
+          "age_group": "adult",
+          "reference_sample": "10_servant_utility_male.wav",
+          "default_mood": "neutral",
+          "style_description": "Humble, loyal, rustic, polite Indian servant/helper voice"
+        },
+        "HEROINE": {
+          "role": "Female Protagonist (Heroine / नायिका)",
+          "gender": "female",
+          "age_group": "young_adult",
+          "reference_sample": "11_heroine_soft_female.wav",
+          "default_mood": "romantic",
+          "style_description": "Sweet, tender, melodious, deeply emotional young female lead voice"
+        },
+        "HEROINE_BOLD": {
+          "role": "Bold Heroine (सशक्त / बिंदास नायिका)",
+          "gender": "female",
+          "age_group": "young_adult",
+          "reference_sample": "12_heroine_bold_female.wav",
+          "default_mood": "angry",
+          "style_description": "Confident, articulate, fierce, independent modern young woman voice"
+        },
+        "SISTER": {
+          "role": "Sister (बहन / दीदी)",
+          "gender": "female",
+          "age_group": "young_adult",
+          "reference_sample": "13_sister_young_female.wav",
+          "default_mood": "romantic",
+          "style_description": "Chirpy, teasing, lively, loving Indian sister voice"
+        },
+        "VAMP": {
+          "role": "Vamp / Seductive Rival (षड्यंत्रकारी सौतन / वैम्प)",
+          "gender": "female",
+          "age_group": "adult",
+          "reference_sample": "14_vamp_cunning_female.wav",
+          "default_mood": "whisper",
+          "style_description": "Cunning, manipulative, sarcastic, seductive female antagonist voice"
         },
         "MOTHER": {
-          "role": "Mother / माँ",
+          "role": "Mother (माँ / ममतामयी माँ)",
           "gender": "female",
-          "reference_sample": "mother_female.wav",
+          "age_group": "elderly",
+          "reference_sample": "15_mother_gentle_female.wav",
           "default_mood": "emotional",
-          "style_description": "Gentle, affectionate, worried Indian mother voice"
+          "style_description": "Tender, nurturing, tearful, warm Indian mother voice"
+        },
+        "MOTHER_STRICT": {
+          "role": "Strict Mother / Saas (सख्त माँ / सास)",
+          "gender": "female",
+          "age_group": "elderly",
+          "reference_sample": "16_mother_strict_female.wav",
+          "default_mood": "angry",
+          "style_description": "Orthodox, commanding, sharp-tongued mother-in-law / matriarch voice"
+        },
+        "BHABHI": {
+          "role": "Bhabhi / Aunt (भाभी / चाची)",
+          "gender": "female",
+          "age_group": "adult",
+          "reference_sample": "17_bhabhi_mature_female.wav",
+          "default_mood": "neutral",
+          "style_description": "Warm, understanding, witty, mature Indian bhabhi/aunt voice"
+        },
+        "GRANDMOTHER": {
+          "role": "Grandmother (दादी / नानी)",
+          "gender": "female",
+          "age_group": "elderly",
+          "reference_sample": "18_elder_grandmother_female.wav",
+          "default_mood": "sad",
+          "style_description": "Loving, fragile, soothing, story-telling grandmother voice"
+        },
+        "CHILD_FEMALE": {
+          "role": "Child Girl (छोटी बच्ची / बिटिया / पिंकी)",
+          "gender": "female",
+          "age_group": "child",
+          "reference_sample": "19_child_kid_female.wav",
+          "default_mood": "romantic",
+          "style_description": "Innocent, sweet, high-pitched, lively little girl voice"
+        },
+        "CHILD_MALE": {
+          "role": "Child Boy (छोटा बच्चा / मुन्ना / गोलू)",
+          "gender": "male",
+          "age_group": "child",
+          "reference_sample": "20_child_kid_male.wav",
+          "default_mood": "neutral",
+          "style_description": "Playful, bright, energetic, innocent little boy voice"
         }
       }
     }

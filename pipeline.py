@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from config.settings import (
+    CHANNEL_NAME,
     CONFIG_DIR,
     SCRIPTS_DIR,
     AUDIO_CHUNKS_DIR,
@@ -39,7 +40,10 @@ def run_audio_story_pipeline(
     duration_mins: int = 5,
     custom_script_path: str = None,
     output_prefix: str = "story",
-    engine: str = DEFAULT_TTS_ENGINE
+    engine: str = DEFAULT_TTS_ENGINE,
+    render_video: bool = True,
+    thumbnail_path: str = None,
+    channel_name: str = CHANNEL_NAME
 ):
     print("=" * 72)
     print(" 💔 DESI ROMANCE & EMOTIONAL TWIST DRAMA AUDIO PIPELINE")
@@ -105,6 +109,7 @@ def run_audio_story_pipeline(
             voice_engine.synthesize_segment(
                 text=task["text"],
                 output_path=out_chunk,
+                character=char,
                 reference_sample_path=task.get("reference_sample"),
                 mood=task.get("mood", "romantic"),
                 exaggeration=task.get("exaggeration", 0.65),
@@ -128,7 +133,57 @@ def run_audio_story_pipeline(
     )
 
     # -------------------------------------------------------------
-    # STAGE 5: YOUTUBE & PODCAST METADATA GENERATION
+    # STAGE 5: FULL HD 1080P VIDEO GENERATION (RADIO FM VISUALIZER)
+    # -------------------------------------------------------------
+    print("\n--- [STAGE 5] FULL HD 1080P VIDEO GENERATION (RADIO FM VISUALIZER) ---")
+    master_mp4 = None
+    if render_video:
+        try:
+            import soundfile as sf
+            from video_engine.video_renderer import VideoRenderer
+            from seo_engine.ai_thumbnail_generator import AIThumbnailGenerator
+
+            # 1. Resolve or Auto-Generate 16:9 Glowing Thumbnail
+            if not thumbnail_path or not os.path.exists(thumbnail_path):
+                # Check if script has embedded thumbnail_path
+                try:
+                    with open(script_file, "r", encoding="utf-8") as sf_f:
+                        s_data = json.load(sf_f)
+                        if s_data.get("thumbnail_path") and os.path.exists(s_data["thumbnail_path"]):
+                            thumbnail_path = s_data["thumbnail_path"]
+                except Exception:
+                    pass
+
+            if not thumbnail_path or not os.path.exists(thumbnail_path):
+                # Auto-generate 16:9 glowing poster
+                intense_text = " ".join([t.get("text", "") for t in scene_tasks[:4]])
+                thumb_file = AIThumbnailGenerator().generate_story_thumbnail(
+                    story_title=topic,
+                    story_text=intense_text
+                )
+                thumbnail_path = str(thumb_file)
+            
+            durations = []
+            for f in audio_files:
+                try:
+                    durations.append(sf.info(str(f)).duration)
+                except Exception:
+                    durations.append(3.0)
+            
+            v_renderer = VideoRenderer()
+            master_mp4 = v_renderer.render_audio_drama_video(
+                master_audio_path=master_wav,
+                story_title=topic,
+                scene_tasks=scene_tasks,
+                segment_durations=durations,
+                source_image_path=thumbnail_path if thumbnail_path and os.path.exists(thumbnail_path) else None,
+                channel_name=channel_name
+            )
+        except Exception as vid_err:
+            print(f"⚠️ [Pipeline] Video rendering notice: {vid_err}")
+
+    # -------------------------------------------------------------
+    # STAGE 6: YOUTUBE & PODCAST METADATA GENERATION
     # -------------------------------------------------------------
     print("--- [STAGE 5] METADATA & PACKAGING ---")
     meta_path = FINAL_MASTERS_DIR / f"{master_mp3.stem}_metadata.txt"
@@ -143,7 +198,8 @@ Description:
 
 🎧 सर्वश्रेष्ठ अनुभव के लिए कृपया हेडफ़ोन (Headphones) का उपयोग करें।
 
-Master Audio Files:
+Master Media Files:
+MP4 (1080p Video): {master_mp4 if master_mp4 else 'N/A'}
 WAV: {master_wav}
 MP3 (320kbps): {master_mp3}
 """
@@ -156,8 +212,37 @@ MP3 (320kbps): {master_mp3}
     print(f"  Mode:        {'⚡ Testing Mode (Edge TTS)' if engine == 'edge' else '🎙️ Production (Chatterbox V3)'}")
     print(f"  Master WAV:  {master_wav}")
     print(f"  Master MP3:  {master_mp3} (320 kbps)")
+    if master_mp4:
+        print(f"  Master MP4:  {master_mp4} (Full HD 1080p Video)")
     print("=" * 72)
-    return master_wav, master_mp3
+
+    # -------------------------------------------------------------
+    # STAGE 5: AUTOMATIC GMAIL NOTIFICATION UPON COMPLETION
+    # -------------------------------------------------------------
+    try:
+        from audio_mixer.email_notifier import send_drama_complete_email
+        char_dist = {}
+        for t in scene_tasks:
+            c = t.get("character", "NARRATOR")
+            char_dist[c] = char_dist.get(c, 0) + 1
+        
+        # Estimate duration
+        total_dur_s = len(scene_tasks) * 8.5
+        dur_str = f"{round(total_dur_s/3600, 1)} Hours (~{round(total_dur_s/60)} mins)"
+        word_cnt = sum(len(t.get("text", "").split()) for t in scene_tasks)
+        
+        send_drama_complete_email(
+            story_title=topic,
+            duration_str=dur_str,
+            word_count=word_cnt,
+            master_file_path=str(master_mp4 if master_mp4 else master_mp3),
+            character_breakdown=char_dist,
+            engine_name="Chatterbox V3 Neural TTS (GPU)" if engine == "chatterbox" else "Edge TTS"
+        )
+    except Exception as em_err:
+        print(f"⚠️ [Pipeline] Email notification notice: {em_err}")
+
+    return master_wav, master_mp3, master_mp4
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Desi Love & Romance Audio Automation")
@@ -167,7 +252,10 @@ if __name__ == "__main__":
     parser.add_argument("--duration", type=int, default=5, help="Estimated duration in minutes")
     parser.add_argument("--script", type=str, default=None, help="Path to custom JSON script")
     parser.add_argument("--prefix", type=str, default="romance_drama", help="Output filename prefix")
-    parser.add_argument("--engine", type=str, default=DEFAULT_TTS_ENGINE, choices=["edge", "chatterbox"], help="TTS Engine: edge (testing) or chatterbox (production)")
+    parser.add_argument("--engine", type=str, default="chatterbox", choices=["chatterbox", "edge"], help="TTS Engine: edge (testing) or chatterbox (production)")
+    parser.add_argument("--video", action="store_true", default=True, help="Generate Full HD 1080p MP4 Video with visualizer")
+    parser.add_argument("--thumbnail", type=str, default=None, help="Optional custom background/thumbnail image path")
+    parser.add_argument("--channel", type=str, default=CHANNEL_NAME, help="YouTube Channel Name branding")
 
     args = parser.parse_args()
     run_audio_story_pipeline(
@@ -177,5 +265,8 @@ if __name__ == "__main__":
         duration_mins=args.duration,
         custom_script_path=args.script,
         output_prefix=args.prefix,
-        engine=args.engine
+        engine=args.engine,
+        render_video=args.video,
+        thumbnail_path=args.thumbnail,
+        channel_name=args.channel
     )

@@ -1,20 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Studio Audio Enhancer (Cinema Quality Vocal Mastering)
-Specially engineered to eliminate harsh digital bite ("कान में चुभन ख़त्म करना"):
-1. High-Pass Filter (65Hz male / 80Hz female) - Cleans sub-bass rumble
-2. Cinema Vocal Warmth:
-   - Male: 150 Hz boost (+3.5 dB)
-   - Female (Heroine): 240 Hz boost (+3.5 dB) for silky, warm, full-bodied presence
-3. Anti-Harshness & Dedicated Multi-Stage De-Esser:
-   - Cuts nasal harsh bite at 3400 Hz (-4.5 dB)
-   - Female De-Esser: Deep notch at 4800 Hz (-8.0 dB) to permanently eliminate piercing sibilance (स, श, च)
-4. Silky Cinema High-Cut:
-   - Female: Low-pass filter at 5500 Hz (transforms sharp digital TTS into a smooth cinema ribbon mic tone)
-   - Male: Low-pass filter at 6800 Hz
-5. Smooth Optical Dynamic Compression (Clarity without ear fatigue or pumping)
-6. Warm Analog Tube Saturation (Silky soft rounding of digital peaks)
-7. Broadcast Loudness Normalization (-23 LUFS male, -24.5 LUFS female)
+Cinema-Grade Audio Enhancer & Multi-Acoustic Mastering DSP.
+Provides customized Radio FM & Pocket FM acoustic mastering chains for:
+1. Male Cinema (Narrator, Hero, Father, Villain, Cop, Friend, Servant)
+2. Female Cinema (Heroine, Sister, Bhabhi, Vamp, Mother)
+3. Child / Kid Cinema (Child Male, Child Female)
+4. Elderly Cinema (Grandfather, Grandmother)
 """
 
 import os
@@ -51,11 +42,11 @@ def _spectral_gate(audio: np.ndarray, sr: int = 24000, threshold_db: float = -45
     energy_db = 10 * np.log10(np.maximum(energy, 1e-10))
     gate = np.where(energy_db < threshold_db, 0.25, 1.0)
 
-    smooth_gate = np.convolve(gate, np.ones(5) / 5.0, mode='same')
+    smooth_gate = np.convolve(gate, np.ones(5) / 5.0, mode="same")
     gate_expanded = np.repeat(smooth_gate, hop_len)
 
     if len(gate_expanded) < len(audio):
-        gate_expanded = np.pad(gate_expanded, (0, len(audio) - len(gate_expanded)), 'edge')
+        gate_expanded = np.pad(gate_expanded, (0, len(audio) - len(gate_expanded)), "edge")
     else:
         gate_expanded = gate_expanded[:len(audio)]
 
@@ -64,56 +55,87 @@ def _spectral_gate(audio: np.ndarray, sr: int = 24000, threshold_db: float = -45
 
 def _cinema_vocal_toning(audio: np.ndarray, sr: int = 24000, character: str = "NARRATOR") -> np.ndarray:
     """
-    Cinema EQ & Anti-Harshness Mastering:
-    Differentiates male (Narrator/Hero) and female (Heroine/Mother) to completely
-    eliminate piercing sibilance ("कान में चुभन") while providing cinema warmth.
+    Radio FM & Cinema Acoustic Chain tailored by Speaker Category:
+    - Child: Bright, clean, highpass 120Hz, no boomy chest rumble.
+    - Female: Warm, silky, deep de-esser at 4800Hz, roll-off at 5500Hz.
+    - Male: Chest presence 150Hz, notch 3200Hz, de-sibilance 5200Hz.
+    - Elderly: Gentle low-end warmth, mellow rolled-off highs.
     """
-    is_female = character.upper() in ("HEROINE", "FEMALE", "MOTHER", "GIRL", "WOMAN")
+    char_up = character.upper()
 
-    if is_female:
-        # --- FEMALE CINEMA MASTERING CHAIN ---
-        # 1. High-Pass at 80 Hz (clean sub rumble)
-        sos_hp = signal.butter(2, 80, btype='highpass', fs=sr, output='sos')
+    # 1. Child / Kid Voice DSP
+    if any(k in char_up for k in ("CHILD", "KID", "BOY", "GIRL", "MUNNA", "PINKI")):
+        # Highpass at 120Hz (removes low rumble, keeps child vocal light & pure)
+        sos_hp = signal.butter(2, 120, btype="highpass", fs=sr, output="sos")
         audio = signal.sosfilt(sos_hp, audio)
 
-        # 2. Female Chest Warmth & Intimacy: Boost +3.5 dB at 240 Hz (warm velvety body)
+        # Sweet articulate presence (+2.5 dB at 2800 Hz)
+        audio = _peaking_filter(audio, freq=2800.0, gain_db=2.5, q=1.2, sr=sr)
+
+        # Child sibilance control (Cut -4.0 dB at 6000 Hz)
+        audio = _peaking_filter(audio, freq=6000.0, gain_db=-4.0, q=1.5, sr=sr)
+
+        # Gentle analog saturation
+        audio = np.tanh(audio * 1.05) / 1.05
+
+    # 2. Elderly Voice DSP (Grandfather / Grandmother)
+    elif any(k in char_up for k in ("GRANDFATHER", "GRANDMOTHER", "DADA", "DADI", "ELDER")):
+        # Highpass at 75Hz
+        sos_hp = signal.butter(2, 75, btype="highpass", fs=sr, output="sos")
+        audio = signal.sosfilt(sos_hp, audio)
+
+        # Warm mellow body (+2.5 dB at 200 Hz)
+        audio = _peaking_filter(audio, freq=200.0, gain_db=2.5, q=1.1, sr=sr)
+
+        # Smooth high roll-off (> 5200 Hz) for soft aged resonance
+        sos_lp = signal.butter(2, 5200, btype="lowpass", fs=sr, output="sos")
+        audio = signal.sosfilt(sos_lp, audio)
+
+        # Warm tube warmth
+        audio = np.tanh(audio * 1.12) / 1.12
+
+    # 3. Adult Female Voice DSP (Heroine, Mother, Sister, Bhabhi, Vamp)
+    elif any(k in char_up for k in ("HEROINE", "FEMALE", "MOTHER", "SISTER", "BHABHI", "VAMP", "WOMAN")):
+        # Highpass at 80Hz
+        sos_hp = signal.butter(2, 80, btype="highpass", fs=sr, output="sos")
+        audio = signal.sosfilt(sos_hp, audio)
+
+        # Velvety chest warmth (+3.5 dB at 240 Hz)
         audio = _peaking_filter(audio, freq=240.0, gain_db=3.5, q=1.2, sr=sr)
 
-        # 3. Cut Nasal Honk / Upper Mid bite: Cut -4.5 dB at 3400 Hz
+        # Cut nasal bite (-4.5 dB at 3400 Hz)
         audio = _peaking_filter(audio, freq=3400.0, gain_db=-4.5, q=1.4, sr=sr)
 
-        # 4. CRITICAL DE-ESSER: Deep notch Cut -8.0 dB at 4800 Hz
-        # (Permanently eliminates the piercing 's', 'sh', 'ch' bite of SwaraNeural)
+        # Radio FM De-Esser: Notch cut -8.0 dB at 4800 Hz
         audio = _peaking_filter(audio, freq=4800.0, gain_db=-8.0, q=1.8, sr=sr)
 
-        # 5. Silky Cinema High Roll-Off (Gentle lowpass at 5500 Hz)
-        # Removes tinny digital sibilance, transforming into warm movie dialog
-        sos_lp = signal.butter(2, 5500, btype='lowpass', fs=sr, output='sos')
+        # Silky cinema high roll-off at 5500 Hz
+        sos_lp = signal.butter(2, 5500, btype="lowpass", fs=sr, output="sos")
         audio = signal.sosfilt(sos_lp, audio)
 
-        # 6. Silky Analog Tube Saturation
+        # Silky analog tube saturation
         audio = np.tanh(audio * 1.10) / 1.10
 
+    # 4. Adult Male Voice DSP (Narrator, Hero, Father, Villain, Cop, Friend, Servant)
     else:
-        # --- MALE CINEMA MASTERING CHAIN ---
-        # 1. Clean sub-bass rumble (<65Hz)
-        sos_hp = signal.butter(2, 65, btype='highpass', fs=sr, output='sos')
+        # Highpass at 65Hz (anti-rumble)
+        sos_hp = signal.butter(2, 65, btype="highpass", fs=sr, output="sos")
         audio = signal.sosfilt(sos_hp, audio)
 
-        # 2. Cinema Chest Body (150 Hz boost +3.5 dB)
-        audio = _peaking_filter(audio, freq=150.0, gain_db=3.5, q=1.0, sr=sr)
+        # Deep Baritone Chest body (+3.8 dB at 150 Hz)
+        audio = _peaking_filter(audio, freq=150.0, gain_db=3.8, q=1.0, sr=sr)
 
-        # 3. Anti-Harshness: Cut 3200 Hz by -4.5 dB
+        # Anti-harshness (-4.5 dB at 3200 Hz)
         audio = _peaking_filter(audio, freq=3200.0, gain_db=-4.5, q=1.3, sr=sr)
 
-        # 4. De-Sibilance: Cut 5200 Hz by -4.0 dB
+        # De-sibilance (-4.0 dB at 5200 Hz)
         audio = _peaking_filter(audio, freq=5200.0, gain_db=-4.0, q=1.5, sr=sr)
 
-        # 5. Silky Cinema High-Cut (Gentle roll-off > 6800 Hz)
-        sos_lp = signal.butter(2, 6800, btype='lowpass', fs=sr, output='sos')
+        # Cinema high-cut (> 6800 Hz)
+        sos_lp = signal.butter(2, 6800, btype="lowpass", fs=sr, output="sos")
         audio = signal.sosfilt(sos_lp, audio)
 
-        # 6. Warm Vintage Analog Tube Saturation
+        # Vintage analog saturation
         audio = np.tanh(audio * 1.15) / 1.15
 
     return audio.astype(np.float32)
@@ -131,7 +153,7 @@ def _dynamic_range_compression(
     if window_size <= 0 or len(audio) < window_size:
         return audio
 
-    rms = np.convolve(audio**2, np.ones(window_size) / window_size, mode='same')
+    rms = np.convolve(audio**2, np.ones(window_size) / window_size, mode="same")
     rms = np.sqrt(np.maximum(rms, 1e-10))
     rms_db = 20 * np.log10(rms)
 
@@ -194,7 +216,7 @@ def enhance_audio(
     if not os.path.exists(input_wav) or os.path.getsize(input_wav) < 512:
         return input_wav
 
-    audio, file_sr = sf.read(input_wav, dtype='float32')
+    audio, file_sr = sf.read(input_wav, dtype="float32")
     if len(audio.shape) > 1:
         audio = audio.mean(axis=1)
 
@@ -206,7 +228,7 @@ def enhance_audio(
     if enable_gate:
         audio = _spectral_gate(audio, sr)
 
-    # 2. Cinema Vocal Toning & Anti-Piercing De-Esser (Male vs Female)
+    # 2. Cinema Vocal Toning (Tailored for Male, Female, Child, Elderly)
     if enable_toning:
         audio = _cinema_vocal_toning(audio, sr, character=character)
 
@@ -214,9 +236,15 @@ def enhance_audio(
     if enable_compress:
         audio = _dynamic_range_compression(audio, sr=sr)
 
-    # 4. Loudness normalization (-24.5 for female/heroine, -23.0 for male/narrator)
+    # 4. Radio FM Loudness normalization
     if enable_loudness:
-        target = -24.5 if character.upper() in ("HEROINE", "FEMALE", "MOTHER") else -23.0
+        char_up = character.upper()
+        if any(k in char_up for k in ("CHILD", "KID")):
+            target = -24.0
+        elif any(k in char_up for k in ("HEROINE", "FEMALE", "MOTHER", "SISTER", "BHABHI", "VAMP")):
+            target = -24.5
+        else:
+            target = -23.0
         audio = _loudness_normalize(audio, target_lufs=target)
 
     peak = np.max(np.abs(audio))
@@ -224,5 +252,5 @@ def enhance_audio(
         audio = audio * (0.97 / peak)
 
     os.makedirs(os.path.dirname(output_wav), exist_ok=True)
-    sf.write(output_wav, audio, sr, subtype='PCM_16')
+    sf.write(output_wav, audio, sr, subtype="PCM_16")
     return output_wav

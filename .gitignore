@@ -1,16 +1,25 @@
 # Environments & Secrets
 .env
 .env.local
+.env.*
 kaggle.json
+client_secrets.json
+tokens/
+*.token
+*.pickle
 
-# Audio Outputs & Chunks (Generated at runtime)
+# Audio & Video Outputs & Large media
 output/
-assets/bgm/*_24k.wav
 *.wav
-*.temp.mp3
+*.mp3
+*.mp4
+*.ogg
 *.raw.wav
 
-# Python Cache
+# Python Cache & IDE
 __pycache__/
 *.py[cod]
 *.class
+.vscode/
+.idea/
+.pytest_cache/

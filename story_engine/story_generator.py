@@ -67,9 +67,10 @@ class StoryGenerator:
         import requests
 
         user_prompt = f"""
-Write a complete, emotional audio drama script in Hindi for the topic: '{topic}'.
+Write a rich, cinematic multi-character audio drama script in Hindi for the topic: '{topic}'.
 Estimated audio length: {duration_minutes} minutes.
-Characters: Hero ({hero_name}), Heroine ({heroine_name}), Narrator (कथावाचक).
+Main Leads: Hero ({hero_name}), Heroine ({heroine_name}), Narrator (कथावाचक).
+Supporting Cast to naturally incorporate: Family (MOTHER, FATHER, FATHER_STRICT), Children (CHILD_MALE, CHILD_FEMALE), Elders (GRANDMOTHER, GRANDFATHER), Siblings (SISTER, BHABHI), Friend (FRIEND_MALE), Professionals (COP_DOCTOR), Antagonists (VILLAIN, VAMP).
 Twist Theme: {twist_theme}.
 
 Return ONLY a valid JSON object matching this schema:
@@ -80,11 +81,11 @@ Return ONLY a valid JSON object matching this schema:
   "bgm_theme": "romantic_sad_piano",
   "scenes": [
     {{
-      "character": "NARRATOR or HERO or HEROINE",
-      "mood": "romantic or sad or emotional or crying or whisper or angry or cinematic",
-      "text": "Dialogue or narration in heart-touching Hindi",
-      "sfx_cue": "rain or heartbeat or paper_rustle or door_slam",
-      "bgm_cue": "sad_piano or emotional_strings or violin_solo"
+      "character": "NARRATOR, HERO, HERO_ANGRY, HEROINE, HEROINE_BOLD, MOTHER, MOTHER_STRICT, FATHER, FATHER_STRICT, CHILD_MALE, CHILD_FEMALE, GRANDMOTHER, GRANDFATHER, COP_DOCTOR, SISTER, BHABHI, FRIEND_MALE, VILLAIN, VAMP, or SERVANT_MALE",
+      "mood": "romantic or sad or emotional or crying or whisper or angry or cinematic or neutral",
+      "text": "Heart-touching Hindi dialogue or narrative",
+      "sfx_cue": "none",
+      "bgm_cue": "romantic_sad_piano"
     }}
   ]
 }}

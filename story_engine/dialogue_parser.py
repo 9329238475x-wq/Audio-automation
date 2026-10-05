@@ -233,38 +233,141 @@ class DramaScriptBuilder:
         return scenes
 
     def _determine_character(self, tag: str, verb: str, hero: str, heroine: str, last_spk: str) -> str:
-        tag_lower = tag.lower()
-        female_cues = ['लड़की', 'लड़की', 'महिला', 'स्त्री', 'मैडम', 'madam', heroine.lower(), 'सरिता', 'पत्नी', 'माँ', 'माता', 'दीदी', 'बहन']
-        for c in female_cues:
-            if c in tag_lower:
-                return 'HEROINE'
+        combined = f"{tag} {verb}".lower()
 
-        male_cues = ['लड़का', 'लड़का', 'सुभास', 'सुभाष', hero.lower(), 'पति', 'पिता', 'बाप', 'भाई', 'दोस्त', 'डॉक्टर', 'doctor']
-        for c in male_cues:
-            if c in tag_lower:
-                return 'HERO'
+        # 1. Child speakers (Highest priority)
+        if any(w in combined for w in ['बच्ची', 'बिटिया', 'पिंकी', 'गुड़िया', 'लड़की', 'कन्या', 'छुटकी', 'child_female', 'kid_female', 'little_girl']):
+            return 'CHILD_FEMALE'
+        if any(w in combined for w in ['बच्चा', 'मुन्ना', 'गोलू', 'छोटू', 'बालक', 'child_male', 'kid_male', 'little_boy', 'kid', 'child']):
+            return 'CHILD_MALE'
 
-        if 'बोली' in verb or 'कही' in verb or 'कहने लगी' in verb or 'चिल्लाई' in verb:
+        # 2. Grandparents
+        if any(w in combined for w in ['दादी', 'नानी', 'अम्मा', 'बुढ़िया', 'grandmother', 'dadi', 'nani']):
+            return 'GRANDMOTHER'
+        if any(w in combined for w in ['दादा', 'नाना', 'बाबा', 'बूढ़ा', 'वृद्ध', 'grandfather', 'dada', 'nana']):
+            return 'GRANDFATHER'
+
+        # 3. Mothers & Saas
+        if any(w in combined for w in ['सास', 'कठोर माँ', 'saas', 'सासू']):
+            return 'MOTHER_STRICT'
+        if any(w in combined for w in ['माँ', 'माता', 'मैया', 'मां', 'अम्मी', 'mother', 'mom', 'maa']):
+            return 'MOTHER'
+
+        # 4. Fathers & Patriarchs
+        if any(w in combined for w in ['सख्त पिता', 'कड़क पिता', 'मुखिया', 'ठाकुर', 'जमींदार', 'strict_father']):
+            return 'FATHER_STRICT'
+        if any(w in combined for w in ['पिता', 'पिताजी', 'बापू', 'अब्बा', 'पापा', 'बाबूजी', 'father', 'dad', 'pitaji']):
+            return 'FATHER'
+
+        # 5. Professionals (Police / Doctor / Lawyer)
+        if any(w in combined for w in ['डॉक्टर', 'दरोगा', 'इंस्पेक्टर', 'हवलदार', 'वकील', 'जज', 'वैद्य', 'doctor', 'cop', 'inspector']):
+            return 'COP_DOCTOR'
+
+        # 6. Sister & Bhabhi/Aunt
+        if any(w in combined for w in ['बहन', 'दीदी', 'बहना', 'sister', 'didi']):
+            return 'SISTER'
+        if any(w in combined for w in ['भाभी', 'चाची', 'ताई', 'मौसी', 'मामी', 'bhabhi', 'chachi']):
+            return 'BHABHI'
+
+        # 7. Antagonists (Villain / Vamp)
+        if any(w in combined for w in ['सौतन', 'वैम्प', 'डायन', 'षड्यंत्रकारी', 'vamp', 'sautan']):
+            return 'VAMP'
+        if any(w in combined for w in ['खलनायक', 'विलेन', 'गुंडा', 'बदमाश', 'दुश्मन', 'villain', 'rival', 'gunda', 'dushman']):
+            return 'VILLAIN'
+
+        # 8. Servants & Helpers
+        if any(w in combined for w in ['नौकर', 'ड्राइवर', 'माली', 'रसोइया', 'सेवक', 'servant', 'driver', 'ramu', 'helper', 'peon']):
+            return 'SERVANT_MALE'
+
+        # 9. Friends
+        if any(w in combined for w in ['दोस्त', 'यार', 'मित्र', 'सखा', 'friend', 'buddy', 'pal']):
+            return 'FRIEND_MALE'
+
+        # 10. Heroine (Bold vs Romantic)
+        if any(w in combined for w in ['सशक्त', 'बिंदास', 'गुस्सैल नायिका', 'चीखती हुई', 'bold']):
+            return 'HEROINE_BOLD'
+        if heroine.lower() in combined or any(w in combined for w in ['नायिका', 'पत्नी', 'पत्नी बोली']):
             return 'HEROINE'
-        if 'बोला' in verb or 'कहा' in verb or 'कहने लगा' in verb or 'चिल्लाया' in verb:
+
+        # 11. Hero (Angry vs Romantic)
+        if any(w in combined for w in ['गुस्से में कबीर', 'दहाड़ा', 'क्रोधित', 'गर्जना', 'angry']):
+            return 'HERO_ANGRY'
+        if hero.lower() in combined or any(w in combined for w in ['नायक', 'पति', 'पति बोला']):
             return 'HERO'
 
-        if last_spk == 'HERO':
-            return 'HEROINE'
-        elif last_spk == 'HEROINE':
-            return 'HERO'
+        # Verb-based fallback with smart alternating speaker selection
+        if any(v in verb for v in ['बोली', 'कही', 'कहने लगी', 'चिल्लाई', 'फुसफुसाई']):
+            return 'HEROINE' if last_spk != 'HEROINE' else 'SISTER'
+        if any(v in verb for v in ['बोला', 'कहा', 'कहने लगा', 'चिल्लाया', 'दहाड़ा']):
+            return 'HERO' if last_spk != 'HERO' else 'FRIEND_MALE'
 
-        return 'HERO'
+        # Dynamic rotation
+        return 'HEROINE' if last_spk == 'HERO' else 'HERO'
 
     def _determine_quote_speaker(self, quote: str, context: str, hero: str, heroine: str, last_spk: str) -> str:
         ctx_lower = context.lower()
-        if heroine.lower() in ctx_lower or 'लड़की' in ctx_lower or 'बोली' in ctx_lower or 'कही' in ctx_lower:
+        quote_lower = quote.lower()
+        combined = f"{ctx_lower} {quote_lower}"
+
+        # 1. Child Cues
+        if any(w in combined for w in ['बच्ची', 'बिटिया', 'पिंकी', 'गुड़िया', 'पापा मुझे डर लग रहा', 'मम्मी', 'खिलौना']):
+            return 'CHILD_FEMALE'
+        if any(w in combined for w in ['बच्चा', 'मुन्ना', 'गोलू', 'छोटू', 'दीदी खेलेंगे', 'भैया', 'गुल्ली']):
+            return 'CHILD_MALE'
+
+        # 2. Grandparents
+        if any(w in combined for w in ['दादी', 'नानी', 'पोता', 'पोती', 'अम्मा जी', 'बेटा जुग जुग जियो']):
+            return 'GRANDMOTHER'
+        if any(w in combined for w in ['दादा', 'नाना', 'बाबा', 'नाती', 'वृद्ध', 'हमारे ज़माने में']):
+            return 'GRANDFATHER'
+
+        # 3. Parents
+        if any(w in combined for w in ['सास', 'बहू', 'कुलच्छनी', 'खानदान की नाक']):
+            return 'MOTHER_STRICT'
+        if any(w in combined for w in ['माँ', 'माता', 'बेटा', 'मेरे बच्चे', 'ममता', 'खाना खा ले']):
+            return 'MOTHER'
+        if any(w in combined for w in ['सख्त पिता', 'कड़क पिता', 'ख़ामोश', 'मेरी मर्ज़ी', 'दहलीज़ पार मत करना']):
+            return 'FATHER_STRICT'
+        if any(w in combined for w in ['पिता', 'पिताजी', 'बाबूजी', 'बापू', 'पापा']):
+            return 'FATHER'
+
+        # 4. Professionals
+        if any(w in combined for w in ['डॉक्टर', 'मरीज', 'दवा', 'इलाज', 'दरोगा', 'थाने', 'पुलिस', 'कानून', 'वारंट', 'हथकड़ी']):
+            return 'COP_DOCTOR'
+
+        # 5. Sister & Bhabhi
+        if any(w in combined for w in ['बहन', 'दीदी', 'जीजू']):
+            return 'SISTER'
+        if any(w in combined for w in ['भाभी', 'देवर', 'चाची']):
+            return 'BHABHI'
+
+        # 6. Antagonists
+        if any(w in combined for w in ['सौतन', 'वैम्प', 'बर्बाद कर दूंगी', 'कंगाल']):
+            return 'VAMP'
+        if any(w in combined for w in ['खलनायक', 'विलेन', 'बदला', 'मार डालूँगा', 'दुश्मन', 'औकात']):
+            return 'VILLAIN'
+
+        # 7. Servants & Helpers
+        if any(w in combined for w in ['मालिक', 'हुजूर', 'सरकार', 'साहब जी', 'गाड़ी निकालूं', 'चाय लाऊं']):
+            return 'SERVANT_MALE'
+
+        # 8. Friends
+        if any(w in combined for w in ['दोस्त', 'यार', 'भाई तू चिंता मत कर', 'अरे यार']):
+            return 'FRIEND_MALE'
+
+        # 9. Main Leads
+        if any(w in combined for w in ['सशक्त', 'चीखती हुई', 'मैं नहीं झुकूंगी', 'मेरी जिंदगी']):
+            return 'HEROINE_BOLD'
+        if heroine.lower() in ctx_lower or any(w in ctx_lower for w in ['लड़की बोली', 'नायिका', 'कही']):
             return 'HEROINE'
-        if hero.lower() in ctx_lower or 'लड़का' in ctx_lower or 'बोला' in ctx_lower:
+
+        if any(w in combined for w in ['गुस्से में दहाड़ा', 'चिल्लाया', 'ख़ून खौल', 'बकवास बंद करो']):
+            return 'HERO_ANGRY'
+        if hero.lower() in ctx_lower or any(w in ctx_lower for w in ['लड़का बोला', 'नायक', 'कहा']):
             return 'HERO'
-        if last_spk == 'HERO':
-            return 'HEROINE'
-        return 'HERO'
+
+        # Dynamic turn taking
+        return 'HEROINE' if last_spk == 'HERO' else 'HERO'
 
     def _determine_mood(self, text: str, action: str = '') -> str:
         combined = f'{text} {action}'

@@ -225,8 +225,8 @@ def interactive_menu(scraper: StoryScraper):
     # Prompt to run audio pipeline
     run_now = input("\nक्या आप अभी इसका स्टूडियो ऑडियो ड्रामा बनाना चाहते हैं? (Y/n): ").strip().lower()
     if run_now in ("", "y", "yes"):
-        eng_choice = input("वॉइस इंजन: 1) Edge TTS (Fast Cinema)  2) Chatterbox V3 (default: 1): ").strip()
-        engine = "chatterbox" if eng_choice == "2" else "edge"
+        eng_choice = input("वॉइस इंजन: 1) 🎙️ Chatterbox V3 (Production Neural)  2) Edge TTS (default: 1): ").strip()
+        engine = "edge" if eng_choice == "2" else "chatterbox"
         print(f"\n🚀 Launching Studio Audio Production Pipeline ({engine.upper()})...")
         run_audio_story_pipeline(
             topic=title,
@@ -253,7 +253,7 @@ def main():
     parser.add_argument("--text", type=str, default=None, help="Direct story text string")
     parser.add_argument("--max-scenes", type=int, default=None, help="Optional: max scenes limit (Default: None = 100%% FULL STORY)")
     parser.add_argument("--run", action="store_true", help="Automatically run audio production after scraping")
-    parser.add_argument("--engine", type=str, default="edge", choices=["edge", "chatterbox"], help="TTS Engine: edge or chatterbox")
+    parser.add_argument("--engine", type=str, default="chatterbox", choices=["edge", "chatterbox"], help="TTS Engine: edge or chatterbox")
     parser.add_argument("--hero", type=str, default=None, help="Custom Hero Name")
     parser.add_argument("--heroine", type=str, default=None, help="Custom Heroine Name")
     parser.add_argument("--interactive", action="store_true", help="Launch interactive menu")

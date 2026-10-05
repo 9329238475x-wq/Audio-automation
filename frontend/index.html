@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket FM Studio - YouTube Automation Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #070a12;
+            --bg-card: rgba(18, 24, 38, 0.75);
+            --bg-card-hover: rgba(24, 32, 50, 0.9);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 229, 255, 0.35);
+            --primary: #00e5ff;
+            --primary-glow: rgba(0, 229, 255, 0.4);
+            --accent: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.4);
+            --success: #00ff88;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            line-height: 1.5;
+        }
+
+        /* Top Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: rgba(7, 10, 18, 0.85);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .active-channel-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            border-radius: 30px;
+            padding: 6px 14px 6px 8px;
+        }
+
+        .active-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid var(--success);
+        }
+
+        .channel-pill-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .channel-pill-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .channel-pill-handle {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .btn-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #070a12;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 9px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px var(--primary-glow);
+            filter: brightness(1.1);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 32px 24px 80px 24px;
+        }
+
+        /* Banner Notification */
+        .banner-alert {
+            display: none;
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.4);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 28px;
+            align-items: center;
+            gap: 12px;
+            color: var(--success);
+            font-weight: 500;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Channel Card Grid */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .badge {
+            font-family: var(--font-body);
+            font-size: 11px;
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--primary);
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .channel-hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .channel-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            padding: 22px;
+            backdrop-filter: blur(14px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .channel-card.active-card {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.15);
+        }
+
+        .channel-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: var(--bg-card-hover);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .channel-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 14px var(--primary-glow);
+        }
+
+        .channel-meta h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .channel-meta .handle {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .channel-meta .channel-id {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .stat-item .num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-item .lbl {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-switch {
+            flex: 1;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-switch:hover {
+            background: var(--primary);
+            color: #070a12;
+            border-color: var(--primary);
+        }
+
+        .btn-switch.btn-active-now {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: rgba(0, 255, 136, 0.4);
+            color: var(--success);
+            cursor: default;
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .tag-active {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        /* Ready Videos Grid */
+        .video-list-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(14px);
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 24px;
+            align-items: start;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            border-color: rgba(0, 229, 255, 0.3);
+            background: var(--bg-card-hover);
+        }
+
+        .video-thumb-preview {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: #000;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-thumb-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .video-thumb-preview:hover img {
+            transform: scale(1.04);
+        }
+
+        .video-badge-size {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .video-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-row label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            padding: 10px 14px;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+            width: 100%;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 85px;
+            line-height: 1.4;
+        }
+
+        .form-cols-2 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 14px;
+        }
+
+        .btn-upload-yt {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ff0033, #ff4d4d);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px rgba(255, 0, 51, 0.4);
+            margin-top: 6px;
+        }
+
+        .btn-upload-yt:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(255, 0, 51, 0.55);
+            filter: brightness(1.1);
+        }
+
+        .btn-upload-yt:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Upload Progress Component */
+        .upload-progress-box {
+            display: none;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-top: 14px;
+        }
+
+        .progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            background: rgba(255, 255, 255, 0.08);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--success));
+            border-radius: 5px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .upload-success-badge {
+            display: none;
+            margin-top: 14px;
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.35);
+            border-radius: 12px;
+            padding: 14px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .upload-success-badge .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-view-yt {
+            background: var(--success);
+            color: #070a12;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-view-yt:hover {
+            filter: brightness(1.15);
+            transform: scale(1.03);
+        }
+
+        /* History Table */
+        .history-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(14px);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .history-table th {
+            text-align: left;
+            padding: 12px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .history-table td {
+            padding: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: middle;
+        }
+
+        .history-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .link-yt {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .link-yt:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 860px) {
+            .video-card {
+                grid-template-columns: 1fr;
+            }
+            .form-cols-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="/" class="logo-wrap">
+            <div class="logo-icon">🎙️</div>
+            <div class="logo-text">
+                <h1>POCKET FM STUDIO</h1>
+                <p>YouTube Automation Hub</p>
+            </div>
+        </a>
+
+        <div class="header-actions">
+            <div class="active-channel-pill" id="headerChannelPill">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=80&auto=format&fit=crop" id="headerAvatar" class="active-avatar" alt="Avatar">
+                <div class="channel-pill-info">
+                    <span class="channel-pill-name" id="headerChannelName">Loading Channel...</span>
+                    <span class="channel-pill-handle" id="headerChannelHandle">@youtube</span>
+                </div>
+            </div>
+
+            <a href="/api/auth/login" class="btn-login" id="btnLoginMain">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21.35 11.1H12v2.8h5.35c-.25 1.5-1.5 4.1-5.35 4.1-3.2 0-5.8-2.6-5.8-5.8s2.6-5.8 5.8-5.8c1.8 0 3 0.8 3.7 1.4l2.2-2.1C18.4 4.3 15.5 3.2 12 3.2 6.5 3.2 2 7.7 2 13.2s4.5 10 10 10c5.7 0 9.5-4 9.5-9.7 0-.7-.1-1.4-.15-2.4z"/>
+                </svg>
+                Connect YouTube Channel
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Notification Banner -->
+        <div class="banner-alert" id="successBanner">
+            <span>✅</span>
+            <span id="bannerMsg">YouTube Channel connected successfully!</span>
+        </div>
+
+        <!-- Channel Management Hub -->
+        <div class="section-title">
+            <span>Connected YouTube Channels</span>
+            <span class="badge" id="connectedCountBadge">0 Connected</span>
+        </div>
+
+        <div class="channel-hub-grid" id="channelsGrid">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- Master Videos Ready for YouTube Upload -->
+        <div class="section-title">
+            <span>Production Videos Ready to Publish</span>
+            <span class="badge" id="videoCountBadge">0 Videos</span>
+        </div>
+
+        <div class="video-list-grid" id="videoListGrid">
+            <p style="color:var(--text-muted); padding:20px;">Scanning output/masters for completed audio drama videos...</p>
+        </div>
+
+        <!-- Upload History -->
+        <div class="section-title">
+            <span>Upload History & Live Links</span>
+        </div>
+
+        <div class="history-card">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Video Title</th>
+                        <th>Channel</th>
+                        <th>Privacy</th>
+                        <th>Uploaded Time</th>
+                        <th>YouTube Link</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                    <tr><td colspan="5" style="text-align:center;color:var(--text-muted);">No uploads recorded yet.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // Check for URL query params (e.g. auth_success=1)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('auth_success')) {
+            const banner = document.getElementById('successBanner');
+            const chName = urlParams.get('channel') || 'Channel';
+            document.getElementById('bannerMsg').textContent = `🎉 YouTube Channel '${chName}' successfully connected and ready for uploads!`;
+            banner.style.display = 'flex';
+            setTimeout(() => { banner.style.display = 'none'; }, 6000);
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // 1. Load Channels Status
+        async function loadChannels() {
+            try {
+                const res = await fetch('/api/channels/status');
+                const data = await res.json();
+                
+                document.getElementById('connectedCountBadge').textContent = `${data.total_connected} Connected`;
+                
+                const grid = document.getElementById('channelsGrid');
+                grid.innerHTML = '';
+
+                let activeFound = false;
+
+                data.channels.forEach(ch => {
+                    const isAct = ch.is_active;
+                    if (isAct) {
+                        activeFound = true;
+                        document.getElementById('headerChannelName').textContent = ch.channel_title || ch.profile;
+                        document.getElementById('headerChannelHandle').textContent = ch.custom_url || `@${ch.profile}`;
+                        if (ch.thumbnail) {
+                            document.getElementById('headerAvatar').src = ch.thumbnail;
+                        }
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = `channel-card ${isAct ? 'active-card' : ''}`;
+                    card.innerHTML = `
+                        ${isAct ? '<span class="card-tag tag-active">● Active Channel</span>' : ''}
+                        <div class="card-top">
+                            <img src="${ch.thumbnail || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100'}" class="channel-avatar" alt="Avatar">
+                            <div class="channel-meta">
+                                <h3>${ch.channel_title || ch.profile}</h3>
+                                <div class="handle">${ch.custom_url || '@' + ch.profile}</div>
+                                <div class="channel-id">${ch.channel_id ? ch.channel_id.substring(0, 16) + '...' : 'Connected via OAuth'}</div>
+                            </div>
+                        </div>
+
+                        <div class="stats-row">
+                            <div class="stat-item">
+                                <div class="num">${ch.subscriber_count || '-'}</div>
+                                <div class="lbl">Subscribers</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="num">${ch.video_count || '-'}</div>
+                                <div class="lbl">Videos</div>
+                            </div>
+                        </div>
+
+                        <div class="card-actions">
+                            ${isAct ? 
+                                `<button class="btn-switch btn-active-now">✓ Active for Upload</button>` : 
+                                `<button class="btn-switch" onclick="switchChannel('${ch.profile}')">Set as Active Channel</button>`
+                            }
+                            <a href="/api/auth/login?profile=${ch.profile}" class="btn-switch" style="text-align:center;text-decoration:none;">🔄 Reconnect</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                if (!activeFound && data.channels.length > 0) {
+                    const first = data.channels[0];
+                    document.getElementById('headerChannelName').textContent = first.channel_title;
+                    document.getElementById('headerChannelHandle').textContent = first.custom_url || '';
+                    if (first.thumbnail) document.getElementById('headerAvatar').src = first.thumbnail;
+                }
+
+            } catch (err) {
+                console.error("Error loading channels:", err);
+            }
+        }
+
+        async function switchChannel(profile) {
+            try {
+                await fetch('/api/channels/switch', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({channel: profile})
+                });
+                loadChannels();
+            } catch (err) {
+                alert("Failed to switch channel: " + err);
+            }
+        }
+
+        // 2. Load Available Master Videos
+        async function loadVideos() {
+            try {
+                const res = await fetch('/api/videos/available');
+                const data = await res.json();
+
+                document.getElementById('videoCountBadge').textContent = `${data.total} Videos`;
+                const container = document.getElementById('videoListGrid');
+                container.innerHTML = '';
+
+                if (data.videos.length === 0) {
+                    container.innerHTML = `<div style="background:var(--bg-card);border:1px dashed var(--border-glass);border-radius:16px;padding:36px;text-align:center;color:var(--text-muted);">
+                        <h3>No Master .mp4 Videos Found</h3>
+                        <p style="margin-top:6px;font-size:13px;">Render your story audio drama using video_renderer.py or pipeline.py to see it here ready for 1-click YouTube upload.</p>
+                    </div>`;
+                    return;
+                }
+
+                data.videos.forEach((v, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'video-card';
+                    card.id = `videoCard_${index}`;
+
+                    const thumbSrc = v.thumbnail_url || 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=640';
+                    const tagsStr = Array.isArray(v.tags) ? v.tags.join(', ') : v.tags;
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="video-thumb-preview">
+                                <img src="${thumbSrc}" alt="Thumbnail">
+                                <span class="video-badge-size">${v.file_size_mb} MB</span>
+                            </div>
+                            <div style="font-size:12px;color:var(--text-muted);margin-top:10px;word-break:break-all;">
+                                📁 ${v.file_name}
+                            </div>
+                        </div>
+
+                        <div class="video-form">
+                            <div class="form-row">
+                                <label>Video Title (High CTR & Viral)</label>
+                                <input type="text" class="form-input" id="title_${index}" value="${v.title}">
+                            </div>
+
+                            <div class="form-row">
+                                <label>SEO Description & Chapters</label>
+                                <textarea class="form-textarea" id="desc_${index}">${v.description}</textarea>
+                            </div>
+
+                            <div class="form-cols-2">
+                                <div class="form-row">
+                                    <label>Tags (Comma Separated)</label>
+                                    <input type="text" class="form-input" id="tags_${index}" value="${tagsStr}">
+                                </div>
+                                <div class="form-row">
+                                    <label>Privacy Status</label>
+                                    <select class="form-select" id="privacy_${index}">
+                                        <option value="public" selected>Public (Immediate)</option>
+                                        <option value="unlisted">Unlisted (Link Only)</option>
+                                        <option value="private">Private (Test)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button class="btn-upload-yt" id="btnUpload_${index}" onclick="triggerUpload(${index}, '${v.video_path.replace(/\\/g, '\\\\')}', '${(v.thumbnail_path || '').replace(/\\/g, '\\\\')}')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                </svg>
+                                🚀 Upload to Active YouTube Channel
+                            </button>
+
+                            <!-- Live Progress Box -->
+                            <div class="upload-progress-box" id="progressBox_${index}">
+                                <div class="progress-header">
+                                    <span id="progressStatusText_${index}">Starting Upload...</span>
+                                    <span id="progressPercentText_${index}">0%</span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" id="progressBarFill_${index}"></div>
+                                </div>
+                            </div>
+
+                            <!-- Success Banner -->
+                            <div class="upload-success-badge" id="successBox_${index}">
+                                <div class="left">
+                                    <span>🎉</span>
+                                    <span>Uploaded to YouTube!</span>
+                                </div>
+                                <a href="#" target="_blank" class="btn-view-yt" id="linkYtWatch_${index}">Watch on YouTube ↗</a>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+
+            } catch (err) {
+                console.error("Error loading videos:", err);
+            }
+        }
+
+        // 3. Trigger Upload with Live Progress Polling
+        async function triggerUpload(index, videoPath, thumbPath) {
+            const btn = document.getElementById(`btnUpload_${index}`);
+            const progressBox = document.getElementById(`progressBox_${index}`);
+            const statusText = document.getElementById(`progressStatusText_${index}`);
+            const percentText = document.getElementById(`progressPercentText_${index}`);
+            const fill = document.getElementById(`progressBarFill_${index}`);
+            const successBox = document.getElementById(`successBox_${index}`);
+
+            const title = document.getElementById(`title_${index}`).value;
+            const desc = document.getElementById(`desc_${index}`).value;
+            const tags = document.getElementById(`tags_${index}`).value;
+            const privacy = document.getElementById(`privacy_${index}`).value;
+
+            btn.disabled = true;
+            btn.innerHTML = `<span>⏳ Uploading to YouTube...</span>`;
+            progressBox.style.display = 'block';
+            successBox.style.display = 'none';
+
+            try {
+                const res = await fetch('/api/upload/start', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        video_path: videoPath,
+                        title: title,
+                        description: desc,
+                        tags: tags,
+                        privacy_status: privacy,
+                        thumbnail_path: thumbPath || null
+                    })
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.detail || "Upload start failed");
+                }
+
+                const taskId = data.task_id;
+
+                // Poll Progress every 800ms
+                const pollInterval = setInterval(async () => {
+                    try {
+                        const pRes = await fetch(`/api/upload/progress/${taskId}`);
+                        const pData = await pRes.json();
+
+                        const pct = pData.percent || 0;
+                        fill.style.width = `${pct}%`;
+                        percentText.textContent = `${pct}%`;
+                        statusText.textContent = pData.message || 'Uploading...';
+
+                        if (pData.status === 'completed') {
+                            clearInterval(pollInterval);
+                            btn.disabled = false;
+                            btn.innerHTML = `✅ Published to YouTube`;
+                            progressBox.style.display = 'none';
+
+                            const ytUrl = pData.result.url;
+                            document.getElementById(`linkYtWatch_${index}`).href = ytUrl;
+                            successBox.style.display = 'flex';
+                            loadHistory();
+                        } else if (pData.status === 'failed') {
+                            clearInterval(pollInterval);
+                            btn.disabled = false;
+                            btn.innerHTML = `❌ Upload Failed`;
+                            statusText.textContent = `Error: ${pData.error}`;
+                            alert(`Upload failed: ${pData.error}`);
+                        }
+                    } catch (e) {
+                        console.error("Polling error:", e);
+                    }
+                }, 800);
+
+            } catch (err) {
+                alert("Upload failed to start: " + err.message);
+                btn.disabled = false;
+                btn.innerHTML = `🚀 Upload to Active YouTube Channel`;
+                progressBox.style.display = 'none';
+            }
+        }
+
+        // 4. Load History
+        async function loadHistory() {
+            try {
+                const res = await fetch('/api/history');
+                const data = await res.json();
+                const tbody = document.getElementById('historyTableBody');
+
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:24px;">No uploads recorded yet.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = '';
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    const dt = new Date(item.uploaded_at).toLocaleString();
+                    tr.innerHTML = `
+                        <td style="font-weight:600;color:#fff;">${item.title}</td>
+                        <td><span style="color:var(--primary);font-size:12px;">${item.channel_profile || 'Default'}</span></td>
+                        <td><span style="text-transform:capitalize;font-size:12px;color:var(--text-muted);">${item.privacy}</span></td>
+                        <td style="color:var(--text-muted);font-size:12px;">${dt}</td>
+                        <td>
+                            <a href="${item.url}" target="_blank" class="link-yt">
+                                <span>Watch Video</span> ↗
+                            </a>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error("Error loading history:", err);
+            }
+        }
+
+        // Init
+        loadChannels();
+        loadVideos();
+        loadHistory();
+    </script>
+</body>
+</html>

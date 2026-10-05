@@ -37,19 +37,34 @@ Your job is to transform this raw novel text into a professional Multi-Speaker A
 Rules:
 1. Strip all website junk, blog titles, SEO text, "like/subscribe/comment" boilerplates.
 2. Break the text into dialogue turns and narration scenes.
-3. For dialogue attribution like "सुजाता ने रोते हुए कहा-", the attribution belongs to NARRATOR, and the spoken dialogue inside quotes belongs to HEROINE or HERO.
-4. Characters must be categorized as:
-   - "HERO" (Male protagonist)
-   - "HEROINE" (Female protagonist)
-   - "MOTHER" (Elderly female)
-   - "FATHER" (Elderly male)
-   - "RIVAL" (Antagonist / Rival)
-   - "NARRATOR" (Baritone storyteller)
-5. Mood must be one of: "crying", "heartbroken", "angry", "romantic", "sad", "whisper", "cinematic".
+3. For dialogue attribution like 'रोते हुए उसने कहा...', the attribution belongs to NARRATOR, and the spoken dialogue inside quotes belongs to the character.
+4. CASTING MANDATE: Maximize voice diversity across the ensemble cast. DO NOT collapse all characters into Hero/Heroine.
+   Assign dialogue to the EXACT matching role from these 20 studio speakers:
+   - "CHILD_FEMALE" (Little girl / bitiya / pinki / playful innocent daughter)
+   - "CHILD_MALE" (Little boy / munna / golu / playful energetic young son)
+   - "MOTHER" (Gentle, affectionate, worried mother)
+   - "MOTHER_STRICT" (Orthodox, sharp, commanding mother-in-law / saas)
+   - "FATHER" (Emotional, burdened, caring father)
+   - "FATHER_STRICT" (Authoritative, strict patriarch / thakur / mukhiya)
+   - "GRANDMOTHER" (Loving, story-telling, aged dadi / nani)
+   - "GRANDFATHER" (Wise, trembling, affectionate aged dada / nana)
+   - "COP_DOCTOR" (Police inspector, constable, doctor, surgeon, lawyer)
+   - "SISTER" (Caring, affectionate, chirpy sister / didi)
+   - "BHABHI" (Mature, understanding, witty sister-in-law / aunt / chachi)
+   - "FRIEND_MALE" (Loyal best friend / buddy / colleague)
+   - "VILLAIN" (Gritty, ruthless, menacing antagonist / rival / enemy)
+   - "VAMP" (Cunning, sarcastic rival woman / sautan)
+   - "SERVANT_MALE" (Humble, loyal servant / driver / helper / peon)
+   - "HERO" (Male protagonist in love, remorse, or calm dialogue)
+   - "HERO_ANGRY" (Hero in shouting rage, fierce argument, or intense heartbreak)
+   - "HEROINE" (Female protagonist in tender, emotional, or romantic scenes)
+   - "HEROINE_BOLD" (Female protagonist speaking boldly, defiantly, or confronting)
+   - "NARRATOR" (Soulful baritone storyteller)
+5. Mood must be one of: "crying", "heartbroken", "angry", "romantic", "sad", "whisper", "cinematic", "neutral".
 6. Output MUST be ONLY a valid JSON array of objects with keys:
-   - "character": Character tag
+   - "character": One of the 20 character tags above
    - "mood": Delivery emotion
-   - "text": The clean Hindi / English spoken sentence or narration (NO asterisks, NO markdown).
+   - "text": Clean Hindi spoken sentence or narration (NO asterisks, NO markdown).
 """
 
 class GeminiDramaDirector:
@@ -172,6 +187,38 @@ class GeminiDramaDirector:
             speakers[c] = speakers.get(c, 0) + 1
         print(f"  🎭 Character Breakdown: {speakers}")
 
+        # -------------------------------------------------------------
+        # GEMINI DIRECTOR MASTERSTROKE: AUTO 16:9 GLOWING THUMBNAIL & VIRAL SEO
+        # -------------------------------------------------------------
+        print(f"\n🎨 [Gemini AI Director] Designing 16:9 High-CTR Glowing Thumbnail & Viral SEO Kit...")
+        thumbnail_path = None
+        seo_data = {}
+        try:
+            from seo_engine.ai_thumbnail_generator import AIThumbnailGenerator
+            from seo_engine.viral_metadata_generator import ViralMetadataGenerator
+
+            # Climax extraction: Find highest tension scene
+            intense_scenes = [s["text"] for s in all_scenes if s.get("mood") in ("crying", "heartbroken", "angry")]
+            climax_context = " ".join(intense_scenes[:3]) if intense_scenes else (all_scenes[0]["text"] if all_scenes else title)
+
+            # 1. Generate Glowing 16:9 (1920x1080) Thumbnail
+            thumb_gen = AIThumbnailGenerator(api_key=self.api_key)
+            thumb_file = thumb_gen.generate_story_thumbnail(
+                story_title=title,
+                story_text=climax_context
+            )
+            thumbnail_path = str(thumb_file)
+
+            # 2. Generate Viral SEO Kit (Titles + Description + Tags)
+            meta_gen = ViralMetadataGenerator(api_key=self.api_key)
+            seo_data = meta_gen.generate_youtube_kit(
+                story_title=title,
+                story_text=climax_context,
+                character_breakdown=speakers
+            )
+        except Exception as th_err:
+            print(f"  ⚠️ [GeminiDirector] Thumbnail / SEO generation notice: {th_err}")
+
         return {
             "title": title,
             "genre": "AI Directed Bollywood / Pocket FM Audio Drama",
@@ -180,6 +227,8 @@ class GeminiDramaDirector:
                 "HEROINE": heroine_name,
                 "NARRATOR": "Narrator"
             },
+            "thumbnail_path": thumbnail_path,
+            "seo_package": seo_data,
             "total_scenes": len(all_scenes),
             "scenes": all_scenes
         }

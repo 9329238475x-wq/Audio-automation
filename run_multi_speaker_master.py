@@ -27,19 +27,20 @@ print(f"\n🚀 Launching MULTI-SPEAKER Audio Drama Pipeline...")
 print(f"  Script: {script_path.name}")
 print(f"  Engine: Edge TTS (Multi-Speaker: Hero [Male] + Heroine [Female] + Narrator [Baritone])")
 
-master_wav, master_mp3 = run_audio_story_pipeline(
+master_wav, master_mp3, master_mp4 = run_audio_story_pipeline(
     topic=topic,
     hero_name="सुभाष",
     heroine_name="सुजाता",
     custom_script_path=str(script_path),
     output_prefix="multi_speaker_sujata_subhash",
-    engine="edge"
+    engine="chatterbox"
 )
 
 print("\n" + "="*70)
 print("🎉 MULTI-SPEAKER AUDIO DRAMA MASTER COMPLETE!")
 print(f"Master WAV: {master_wav}")
 print(f"Master MP3: {master_mp3}")
+print(f"Master MP4: {master_mp4}")
 if Path(master_mp3).exists():
     size_mb = Path(master_mp3).stat().st_size / (1024 * 1024)
     print(f"MP3 Size: {size_mb:.2f} MB")
