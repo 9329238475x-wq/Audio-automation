@@ -49,4 +49,4 @@ MOOD_PRESETS = {
 }
 
 # Channel Branding
-CHANNEL_NAME = os.environ.get("CHANNEL_NAME", "DESI AUDIO STORIES")
+CHANNEL_NAME = os.environ.get("CHANNEL_NAME", "Garib YT")

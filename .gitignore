@@ -28,3 +28,7 @@ __pycache__/
 # Explicitly TRACK Voice Samples (Crucial Reference Audio for TTS Voice Clones)
 !voice_samples/
 !voice_samples/*.wav
+
+kaggle/pulled/
+kaggle/output/
+temp_kaggle_out/

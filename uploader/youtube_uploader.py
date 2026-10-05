@@ -27,7 +27,7 @@ from googleapiclient.errors import HttpError
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("YouTubeUploader")
 
-ROOT_DIR = Path("C:/Audio-automation")
+ROOT_DIR = Path(__file__).resolve().parent.parent
 CLIENT_SECRETS_FILE = ROOT_DIR / "client_secrets.json"
 TOKENS_DIR = ROOT_DIR / "tokens"
 TOKENS_DIR.mkdir(parents=True, exist_ok=True)
