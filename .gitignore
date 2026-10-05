@@ -3,17 +3,14 @@
 .env.local
 kaggle.json
 
-# Audio Outputs & Chunks (Too heavy for git)
-output/audio_chunks/*
-output/masters/*.wav
-output/temp/*
+# Audio Outputs & Chunks (Generated at runtime)
+output/
+assets/bgm/*_24k.wav
+*.wav
 *.temp.mp3
 *.raw.wav
 
 # Python Cache
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.pytest_cache/
-.coverage
+*.class
