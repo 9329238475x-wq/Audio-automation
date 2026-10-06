@@ -179,7 +179,7 @@ class AutoDramaHunter:
         script_data = builder.build_full_audio_drama_script(
             raw_text=raw_text,
             title=selected_title,
-            add_climax_hook=True
+            add_climax_hook=False
         )
 
         script_path = SCRIPTS_DIR / f'master_{story_id}.json'

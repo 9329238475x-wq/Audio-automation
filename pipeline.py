@@ -122,7 +122,7 @@ def run_audio_story_pipeline(
                 output_path=out_chunk,
                 character=char,
                 mood=task.get("mood", "romantic"),
-                auto_enhance=True
+                auto_enhance=False
             )
         else:
             voice_engine.synthesize_segment(
@@ -133,7 +133,7 @@ def run_audio_story_pipeline(
                 mood=task.get("mood", "romantic"),
                 exaggeration=task.get("exaggeration", 0.65),
                 cfg_weight=task.get("cfg_weight", 0.28),
-                auto_enhance=True
+                auto_enhance=False
             )
         audio_files.append(out_chunk)
 
@@ -148,7 +148,10 @@ def run_audio_story_pipeline(
         story_title=topic,
         scene_tasks=scene_tasks,
         audio_files=audio_files,
-        output_prefix=output_prefix
+        output_prefix=output_prefix,
+        bgm_level=0.02,
+        rain_level=0.0,
+        voice_reverb_wet=0.0
     )
 
     # -------------------------------------------------------------

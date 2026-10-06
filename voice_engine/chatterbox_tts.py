@@ -154,7 +154,7 @@ class ChatterboxVoiceEngine:
         exaggeration: float = 0.65,
         cfg_weight: float = 0.28,
         language: str = TTS_LANGUAGE,
-        auto_enhance: bool = True
+        auto_enhance: bool = False
     ) -> Path:
         """
         Synthesizes a single dialogue/narration segment with emotional nuance and voice cloning.
@@ -193,6 +193,12 @@ class ChatterboxVoiceEngine:
                 if wav.ndim > 1:
                     wav = wav.squeeze()
 
+                # Pure Peak Normalization to -0.5 dB (0.95 peak amplitude)
+                # Gives loud, crisp, full-bodied volume with ZERO DSP effects or reverb!
+                peak = np.max(np.abs(wav))
+                if peak > 1e-4:
+                    wav = (wav / peak) * 0.95
+
                 sf.write(str(raw_output), wav, SAMPLE_RATE, subtype='PCM_16')
                 synthesized = True
             except Exception as e:
@@ -223,6 +229,11 @@ class ChatterboxVoiceEngine:
                     pass
         else:
             if raw_output.exists():
+                if output_path.exists():
+                    try:
+                        output_path.unlink()
+                    except Exception:
+                        pass
                 raw_output.rename(output_path)
 
         return output_path

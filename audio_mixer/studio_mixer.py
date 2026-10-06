@@ -36,9 +36,9 @@ class StudioMixer:
         audio_files: List[Path],
         output_prefix: str = "master_story",
         cleanup_temp: bool = True,
-        bgm_level: float = 0.09,        # Clearly audible, sustained acoustic piano (18%)
-        rain_level: float = 1.0,        # Direct Deep-Rain ambience (already scaled to 0.35 + 5% reverb)
-        voice_reverb_wet: float = 0.05  # 5% Reverb on voice
+        bgm_level: float = 0.02,        # Subtle, non-intrusive background piano (2%)
+        rain_level: float = 0.0,        # ZERO rain ambience (0.0 = completely disabled)
+        voice_reverb_wet: float = 0.0   # ZERO voice reverb (0.0 = pure dry crisp vocal, NO reverb)
     ) -> Tuple[Path, Path]:
         """
         Pure Cinema Mix: Speech + Real Deep Rain + Sustained Acoustic Piano (ZERO artificial SFX).
@@ -80,41 +80,55 @@ class StudioMixer:
         total_duration_s = total_samples / float(SAMPLE_RATE)
         print(f"  Total Story Duration: {total_duration_s:.1f} seconds ({total_duration_s/60:.2f} mins)")
 
-        # 2. Apply 5% Room Reverb on Voice Track
-        print(f"  Applying {voice_reverb_wet*100:.0f}% acoustic room reverb to dialogue...")
-        full_speech = apply_reverb(raw_speech, SAMPLE_RATE, wet=voice_reverb_wet, decay=0.30)
+        # Normalize speech track so it's punchy, clear, and loud (-0.5 dB peak / 0.95 amplitude)
+        speech_peak = np.max(np.abs(raw_speech))
+        if speech_peak > 1e-4:
+            raw_speech = (raw_speech / speech_peak) * 0.95
 
-        # 3. Real Authentic Deep Rain (Uses Deep-Rain.mp3 untouched with 0.35 trim + 5% reverb)
-        print("  Loading authentic Deep-Rain ambience (c:\\Audio-automation\\assets\\bgm\\Deep-Rain.mp3)...")
-        raw_rain = self.bgm_mgr.generate_continuous_rain_ambience(total_duration_s, volume_factor=0.35)
-        if len(raw_rain) < total_samples:
-            raw_rain = np.pad(raw_rain, (0, total_samples - len(raw_rain)))
+        # 2. Voice Reverb (Zero reverb if wet <= 0.0)
+        if voice_reverb_wet > 0.0:
+            print(f"  Applying {voice_reverb_wet*100:.0f}% acoustic room reverb to dialogue...")
+            full_speech = apply_reverb(raw_speech, SAMPLE_RATE, wet=voice_reverb_wet, decay=0.30)
         else:
-            raw_rain = raw_rain[:total_samples]
+            print("  🎙️ Clean Dry Vocal (0% reverb): Maximum voice clarity and directness!")
+            full_speech = raw_speech
 
-        steady_rain = raw_rain * rain_level
-
-        # 4. Long-Sustained Acoustic Grand Piano (Level: 9%, holds 5.5s, no jumping)
-        print(f"  Loading Sustained Acoustic Grand Piano (Level: {bgm_level*100:.1f}%, holds 5.5s steadily)...")
-        bgm_cue = scene_tasks[0].get("bgm_cue", "romantic_sad_piano") if scene_tasks else "romantic_sad_piano"
-        raw_bgm = self.bgm_mgr.get_or_create_bgm(bgm_cue, total_duration_s)
-        if len(raw_bgm) < total_samples:
-            raw_bgm = np.pad(raw_bgm, (0, total_samples - len(raw_bgm)))
+        # 3. Rain Ambience (Disabled if rain_level <= 0.0)
+        if rain_level > 0.0:
+            print("  Loading authentic Deep-Rain ambience...")
+            raw_rain = self.bgm_mgr.generate_continuous_rain_ambience(total_duration_s, volume_factor=0.35)
+            if len(raw_rain) < total_samples:
+                raw_rain = np.pad(raw_rain, (0, total_samples - len(raw_rain)))
+            else:
+                raw_rain = raw_rain[:total_samples]
+            steady_rain = raw_rain * rain_level
         else:
-            raw_bgm = raw_bgm[:total_samples]
+            print("  🚫 Rain Ambience DISABLED (Zero background rain as requested).")
+            steady_rain = np.zeros(total_samples, dtype=np.float32)
 
-        steady_bgm = raw_bgm * bgm_level
+        # 4. Long-Sustained Acoustic Grand Piano (Level: 2%, subtle bed)
+        if bgm_level > 0.0:
+            print(f"  Loading Sustained Acoustic Grand Piano (Level: {bgm_level*100:.1f}%)...")
+            bgm_cue = scene_tasks[0].get("bgm_cue", "romantic_sad_piano") if scene_tasks else "romantic_sad_piano"
+            raw_bgm = self.bgm_mgr.get_or_create_bgm(bgm_cue, total_duration_s)
+            if len(raw_bgm) < total_samples:
+                raw_bgm = np.pad(raw_bgm, (0, total_samples - len(raw_bgm)))
+            else:
+                raw_bgm = raw_bgm[:total_samples]
+            steady_bgm = raw_bgm * bgm_level
+        else:
+            steady_bgm = np.zeros(total_samples, dtype=np.float32)
 
-        # 5. Master Bus Summing (NO SFX: Pure Speech + Deep Rain + Sustained Piano)
-        print("  Summing Master Bus: Cinema Speech + Real Deep Rain + Sustained Piano (ZERO SFX)...")
+        # 5. Master Bus Summing (Speech + Subtle Bed + Zero Rain)
+        print("  Summing Master Bus: Loud Clear Speech + Subtle Bed (ZERO SFX, ZERO Rain)...")
         master_audio = full_speech + steady_bgm + steady_rain
 
-        # 6. Master Peak Limiter & Cinema Soft-Clipping
+        # 6. Master Peak Limiter (Loud YouTube Level)
         peak = np.max(np.abs(master_audio))
-        if peak > 0.95:
-            scale = 0.94 / peak
+        if peak > 0.98:
+            scale = 0.95 / peak
             master_audio = master_audio * scale
-            print(f"  Applied gentle master limiting (Peak was {peak:.2f} -> adjusted to 0.94)")
+            print(f"  Applied gentle master limiting (Peak was {peak:.2f} -> adjusted to 0.95)")
 
         # 7. Export Master WAV and purge older test files
         safe_title = "".join(c for c in story_title if c.isalnum() or c in (" ", "_", "-")).rstrip().replace(" ", "_")
