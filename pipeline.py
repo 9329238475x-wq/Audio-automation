@@ -44,7 +44,8 @@ def run_audio_story_pipeline(
     engine: str = DEFAULT_TTS_ENGINE,
     render_video: bool = True,
     thumbnail_path: str = None,
-    channel_name: str = CHANNEL_NAME
+    channel_name: str = CHANNEL_NAME,
+    clear_cache: bool = True
 ):
     print("=" * 72)
     print(" 💔 DESI ROMANCE & EMOTIONAL TWIST DRAMA AUDIO PIPELINE")
@@ -92,6 +93,13 @@ def run_audio_story_pipeline(
 
     audio_files = []
     AUDIO_CHUNKS_DIR.mkdir(parents=True, exist_ok=True)
+    if clear_cache:
+        print("  🧹 Purging old audio chunks to ensure 100% fresh, loud, effect-free audio...")
+        for old_f in AUDIO_CHUNKS_DIR.glob("*.wav"):
+            try:
+                old_f.unlink()
+            except Exception:
+                pass
 
     total_tasks = len(scene_tasks)
     for task in scene_tasks:
